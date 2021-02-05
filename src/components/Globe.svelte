@@ -57,9 +57,8 @@
 				}
 			}))
 
-
-		const updateAllItemPositions = function (projection) {
-			d3.selectAll('.item')
+		const updatePosition = (items) => {
+			items
 				.style("left", function (d) {
 					const correction = this.getBoundingClientRect().width / 2
 					return projection(d.location)[0] - correction + "px"
@@ -68,14 +67,18 @@
 					const correction = this.getBoundingClientRect().height / 2
 					return projection(d.location)[1] - correction + "px"
 				})
-				.style("max-width", function (d) {
+		}
+
+		const updateMaxWidth = (items) => {
+			let maxWidth = '0px'
+			items.style("max-width", function () {
 					const maxHeight = 50
-					const maxDistance = 250
 					const shrinkage = 0.8
 
 					const globe = d3.select('.globe').node().getBoundingClientRect();
 					const globeCenterX = globe.left + globe.width / 2
 					const globeCenterY = globe.top + globe.height / 2
+					const maxDistance = globe.width / 2
 
 					const item = d3.select(this).node().getBoundingClientRect()
 					const itemCenterX = item.left + item.width / 2
@@ -84,9 +87,17 @@
 					const xDifference = Math.abs(itemCenterX - globeCenterX)
 					const yDifference = Math.abs(globeCenterY - itemCenterY)
 					const distance = Math.sqrt((xDifference * xDifference) + (yDifference * yDifference))
-					return `${maxHeight - (maxHeight * shrinkage * (distance / maxDistance))}px`
-					
+					maxWidth = `${maxHeight - (maxHeight * shrinkage * (distance / maxDistance))}px`				
+					return maxWidth
 				})
+				.style("max-height", maxWidth)
+				
+		}
+
+		const updateAllItemPositions = () => {
+			const items = d3.selectAll('.item')
+			updatePosition(items)
+			updateMaxWidth(items)
 		}
 
 
@@ -109,12 +120,22 @@
 			.attr("class", "item")
 			.style("left", d => projection(d.location)[0] - 25 + "px")
 			.style("top", d => projection(d.location)[1] - 25 + "px")
+			.on("mouseover", function () {
+				const thisItem = d3.select(this)
+				thisItem
+				.style("max-width", "100px")
+				.style("max-height", "100px")
+				updatePosition(thisItem)
+			})		
+			.on("mouseout", function () {
+				const thisItem = d3.select(this)
+				updateMaxWidth(thisItem)
+				updatePosition(thisItem)
+			})
 
 			items.append("img")
 			.attr("class", "item-image")
 			.attr("src", (d) => d.photos[0])
-			.on("mouseover", function () {d3.select(this).style("max-width", "100px"); updateAllItemPositions(projection)})		
-			.on("mouseout", function () {d3.select(this).style("max-width", null); updateAllItemPositions(projection)})
     }
     
 		const rotateGlobe = () => {
@@ -138,56 +159,41 @@
 </script>
 
 <style>
+	#map {
+		width: 100%;
+		height: 100%;
+	}
 
-#map {
-  width: 100%;
-	height: 100%;
-}
+	:global(.globe) {
+		fill: #fafffe;
+		stroke-width: 0.2;
+		stroke: #9db3b0;
+		cursor: grab;
+	}
 
-:global(.globe) {
-	fill: #fafffe;
-	stroke-width: 0.2;
-	stroke: #9db3b0;
-	cursor: grab;
-}
+	:global(.country) {
+		fill: #c3d4d1;
+		stroke: #9db3b0;
+		stroke-width: 0.3;
+		opacity: 0.8;
+		cursor: grab;
+	}
 
-:global(.country) {
-	fill: #c3d4d1;
-	stroke: #9db3b0;
-	stroke-width: 0.3;
-	opacity: 0.8;
-	cursor: grab;
-}
+	:global(.item) {
+		position: absolute;
+		border-radius: 50%;
+		overflow: hidden;
+		max-width: 50px;
+		max-height: 50px;
+		display: flex;
+		border: 2px solid #9db3b0;
+	}
 
-:global(.item) {
-	position: absolute;
-	border: 3px solid #208771;
-	border-radius: 3px;
-}
-
-:global(.item-image) {
-	width: 100%;
-	max-width: 50px;
-}
-
-.tooltip {
-	width: 100px;
-	height: 50px;
-	background-color: rgb(0, 126, 126);
-	position: fixed;
-	top: 0;
-	left: 0;
-}
-
-img {
-	width: 100px;
-}
-
+	:global(.item-image) {
+		width: 100%;
+		object-fit: cover;
+	}
 </style>
 
-<div class="tooltip">
-	<h3>{title}</h3>
-	<img {src} {alt}>
-</div>
 <div id="map">
 </div>
