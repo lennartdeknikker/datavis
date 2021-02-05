@@ -1,4 +1,7 @@
 <script>
+	let title = 'test title'
+	let src = 'test'
+	let alt = 'test'
 	import * as d3 from "d3";
   import { onMount } from 'svelte'
   import data from '../data/data.json'
@@ -25,16 +28,12 @@
 
 		let globe = svg.append("circle")
 			.attr('class', 'globe')
-			.attr("fill", "#EEE")
-			.attr("stroke", "#000")
-			.attr("stroke-width", "0.2")
 			.attr("cx", width/2)
 			.attr("cy", height/2)
 			.attr("r", initialScale)
-			.style("cursor", "grab")
 
 		svg
-			.call(d3.drag().on('drag', (event) => {
+			.call(d3.drag().on('drag', function (event) {
 				const rotate = projection.rotate()
 				const k = sensitivity / projection.scale()
 				projection.rotate([
@@ -43,15 +42,14 @@
 				])
 				path = d3.geoPath().projection(projection)
 				svg.selectAll("path").attr("d", path)
-				console.log(projection(["52.08413659728907", "4.885266573166416"]))
-				svg.selectAll('.location').attr("cx", d => projection(d.location)[0]).attr("cy", d => projection(d.location)[1])
+				updateAllItemPositions(projection)
 			}))
-			.call(d3.zoom().on('zoom', (event) => {
+			.call(d3.zoom().on('zoom', function (event) {
 				if(event.transform.k > 0.3) {
 					projection.scale(initialScale * event.transform.k)
 					path = d3.geoPath().projection(projection)
 					svg.selectAll("path").attr("d", path)
-					svg.selectAll('.location').attr("cx", d => projection(d.location)[0]).attr("cy", d => projection(d.location)[1])
+					updateAllItemPositions(projection)
 					globe.attr("r", projection.scale())
 				}
 				else {
@@ -60,37 +58,58 @@
 			}))
 
 
+		const updateAllItemPositions = function (projection) {
+			d3.selectAll('.item')
+				.style("left", function (d) {
+					const correction = this.getBoundingClientRect().width / 2
+					return projection(d.location)[0] - correction + "px"
+				})
+				.style("top", function (d) {
+					const correction = this.getBoundingClientRect().height / 2
+					return projection(d.location)[1] - correction + "px"
+				})
+				.style("max-width", function (d) {
+					const height = 500
+					const range = 50
+					const shrinkage = 0.6
+
+					const difference = Math.abs((projection(d.location)[1]) - (height / 2))
+					const percentage = difference / (height / 2)
+          console.log('🚀 ~ percentage', percentage)
+					return `${range - (percentage * (shrinkage * range))}px`
+				})
+		}
+
+
 		const loadMap = () => {
 			let map = svg.append("g")
 			map.append("g")
-					.attr("class", "countries")
-					.selectAll("path")
-					.data(geoJson.features)
-					.enter().append("path")
-					.attr("class", "country")
-					.attr("d", path)
-					.attr("fill", "green")
-					.style('stroke', 'black')
-					.style('stroke-width', 0.3)
-					.style("opacity",0.8)
-					.style("cursor", "grab")
+				.attr("class", "countries")
+				.selectAll(".country")
+				.data(geoJson.features)
+				.enter().append("path")
+				.attr("class", "country")
+				.attr("d", path)
 		}
 
-		const addLocations = () => {
-      let locations = svg.append("g")
-      locations.append("g")
-      .selectAll("circle")
+		const addItems = () => {
+			const items = d3.select("#map").append("div")
+      .selectAll(".item")
       .data(data.entries)
-			.enter().append("circle")
-      .attr("class", "location")
-			.attr("cx", d => projection(d.location)[0])
-			.attr("cy", d => projection(d.location)[1])
-			.attr("r", 10)
-			.attr("fill", "red")
+			.enter().append("div")
+			.attr("class", "item")
+			.style("left", d => projection(d.location)[0] - 25 + "px")
+			.style("top", d => projection(d.location)[1] - 25 + "px")
+
+			items.append("img")
+			.attr("class", "item-image")
+			.attr("src", (d) => d.photos[0])
+			.on("mouseover", function () {d3.select(this).style("max-width", "100px"); updateAllItemPositions(projection)})		
+			.on("mouseout", function () {d3.select(this).style("max-width", null); updateAllItemPositions(projection)})
     }
     
 		const rotateGlobe = () => {
-			d3.timer(function(elapsed) {
+			d3.timer(() => {
 				const rotate = projection.rotate()
 				const k = sensitivity / projection.scale()
 				projection.rotate([
@@ -99,21 +118,67 @@
 				])
 				path = d3.geoPath().projection(projection)
 				svg.selectAll("path").attr("d", path)
+				updateAllItemPositions(projection)
 			},200)
 		}
 
 			loadMap()
 			// rotateGlobe()
-			addLocations()
+			addItems()
 	})
 </script>
 
 <style>
-	#map {
+
+#map {
   width: 100%;
-  height: 100%;
+	height: 100%;
+}
+
+:global(.globe) {
+	fill: #fafffe;
+	stroke-width: 0.2;
+	stroke: #9db3b0;
+	cursor: grab;
+}
+
+:global(.country) {
+	fill: #c3d4d1;
+	stroke: #9db3b0;
+	stroke-width: 0.3;
+	opacity: 0.8;
+	cursor: grab;
+}
+
+:global(.item) {
+	position: absolute;
+	border: 3px solid #208771;
+	border-radius: 3px;
+}
+
+:global(.item-image) {
+	width: 100%;
+	max-width: 50px;
+}
+
+.tooltip {
+	width: 100px;
+	height: 50px;
+	background-color: rgb(0, 126, 126);
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+img {
+	width: 100px;
 }
 
 </style>
 
-<div id="map"></div>
+<div class="tooltip">
+	<h3>{title}</h3>
+	<img {src} {alt}>
+</div>
+<div id="map">
+</div>
