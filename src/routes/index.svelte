@@ -6,7 +6,7 @@
 	div {
 		min-width: 500px;
 		min-height: 500px;
-		width: 100%;
+		width: 100vw;
 		height: 500px;
 	}
 </style>

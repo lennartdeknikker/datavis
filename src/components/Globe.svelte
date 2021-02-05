@@ -9,6 +9,7 @@
 
 	onMount(() => {
 		let width = d3.select("#map").node().getBoundingClientRect().width
+    console.log('🚀 ~ width', width)
 		let height = d3.select("#map").node().getBoundingClientRect().height
 		let sensitivity = 75
 
@@ -71,7 +72,8 @@
 
 		const updateMaxWidth = (items) => {
 			let maxWidth = '0px'
-			items.style("max-width", function () {
+			items
+				.style("max-width", function () {
 					const maxHeight = 50
 					const shrinkage = 0.8
 
@@ -96,8 +98,8 @@
 
 		const updateAllItemPositions = () => {
 			const items = d3.selectAll('.item')
-			updatePosition(items)
 			updateMaxWidth(items)
+			updatePosition(items)
 		}
 
 
@@ -161,7 +163,7 @@
 <style>
 	#map {
 		width: 100%;
-		height: 100%;
+		height: 100vh;
 	}
 
 	:global(.globe) {
