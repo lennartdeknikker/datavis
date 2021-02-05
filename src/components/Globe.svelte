@@ -69,14 +69,23 @@
 					return projection(d.location)[1] - correction + "px"
 				})
 				.style("max-width", function (d) {
-					const height = 500
-					const range = 50
-					const shrinkage = 0.6
+					const maxHeight = 50
+					const maxDistance = 250
+					const shrinkage = 0.8
 
-					const difference = Math.abs((projection(d.location)[1]) - (height / 2))
-					const percentage = difference / (height / 2)
-          console.log('🚀 ~ percentage', percentage)
-					return `${range - (percentage * (shrinkage * range))}px`
+					const globe = d3.select('.globe').node().getBoundingClientRect();
+					const globeCenterX = globe.left + globe.width / 2
+					const globeCenterY = globe.top + globe.height / 2
+
+					const item = d3.select(this).node().getBoundingClientRect()
+					const itemCenterX = item.left + item.width / 2
+					const itemCenterY = item.top + item.height / 2
+
+					const xDifference = Math.abs(itemCenterX - globeCenterX)
+					const yDifference = Math.abs(globeCenterY - itemCenterY)
+					const distance = Math.sqrt((xDifference * xDifference) + (yDifference * yDifference))
+					return `${maxHeight - (maxHeight * shrinkage * (distance / maxDistance))}px`
+					
 				})
 		}
 
