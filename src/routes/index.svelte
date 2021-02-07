@@ -1,5 +1,6 @@
 <script>
 	import Globe from '../components/Globe.svelte'
+	import Uploader from '../components/Uploader.svelte';
 </script>
 
 <style>
@@ -16,5 +17,6 @@
 </svelte:head>
 
 <div>
+	<Uploader />
 	<Globe />
 </div>
