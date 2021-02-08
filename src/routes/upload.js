@@ -7,7 +7,7 @@ export async function post(req, res, next) {
     upload(req, res, function (err) {
       if (err instanceof multer.MulterError) console.log('A Multer error occurred when uploading.', err)
       else if (err) console.log('An unknown error occurred when uploading.', err)
-      addToData(req.file)
+      addToData(req.body.name, req.body.dateOfBirth, req.file)
       res.redirect('/')
     })    
   }

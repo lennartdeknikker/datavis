@@ -29,6 +29,50 @@
       "filename": "1612806124407_2021-02-05_lennart.jpeg",
       "path": "static/images/upload/1612806124407_2021-02-05_lennart.jpeg",
       "size": 132219
+    },
+    null,
+    {
+      "fieldname": "picture",
+      "originalname": "IMG_20210201_231303.jpg",
+      "encoding": "7bit",
+      "mimetype": "image/jpeg",
+      "destination": "./static/images/upload",
+      "filename": "1612806710913_2021-02-05_lennart.jpg",
+      "path": "static/images/upload/1612806710913_2021-02-05_lennart.jpg",
+      "size": 3697475
+    },
+    {
+      "file": {
+        "path": "static/images/upload/1612807090687_2021-02-05_lennart.jpg",
+        "mimetype": "image/jpeg",
+        "size": 3697475
+      }
+    },
+    {
+      "file": {
+        "path": "static/images/upload/1612807159536_2021-02-05_lennart.jpg",
+        "mimetype": "image/jpeg",
+        "size": 3697475
+      }
+    },
+    {
+      "name": "lennart",
+      "file": {
+        "name": "1612807268691_undefined_lennart.jpg",
+        "path": "static/images/upload/1612807268691_undefined_lennart.jpg",
+        "mimetype": "image/jpeg",
+        "size": 3697475
+      }
+    },
+    {
+      "name": "lennart",
+      "dateOfBirth": "2021-02-06",
+      "file": {
+        "name": "1612807320159_2021-02-06_lennart.jpg",
+        "path": "static/images/upload/1612807320159_2021-02-06_lennart.jpg",
+        "mimetype": "image/jpeg",
+        "size": 3697475
+      }
     }
   ]
 }

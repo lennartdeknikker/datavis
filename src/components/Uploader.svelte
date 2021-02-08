@@ -1,7 +1,7 @@
 <div>
   <form action="/upload" method="post" enctype="multipart/form-data">
     <input type="text" name="name" />
-    <input type="date" name="birthdate" />
+    <input type="date" name="dateOfBirth" />
     <input type="file" name="picture" />
     <input type="submit" value="send">
   </form>
