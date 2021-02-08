@@ -14,12 +14,14 @@ const parseUploadData = (name, dateOfBirth, file) => {
   const parsedFile = {
     name: name,
     dateOfBirth: dateOfBirth,
-    file: {
-      name: file.filename,
-      path: file.path,
-      mimetype: file.mimetype,
-      size: file.size
-    }
+    photos: [
+      {
+        name: file.filename,
+        path: file.path,
+        mimetype: file.mimetype,
+        size: file.size
+      }
+    ]
   }
 
   return parsedFile
