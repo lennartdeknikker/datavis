@@ -4,7 +4,7 @@
 	let alt = 'test'
 	import * as d3 from "d3";
   import { onMount } from 'svelte'
-  import data from '../data/data.json'
+  import data from '../data/test.json'
   import geoJson from '../data/map.json'
 
 	onMount(() => {
@@ -117,7 +117,7 @@
 		const addItems = () => {
 			const items = d3.select("#map").append("div")
       .selectAll(".item")
-      .data(data.entries)
+      .data(data.fridges)
 			.enter().append("div")
 			.attr("class", "item")
 			.style("left", d => projection(d.location)[0] - 25 + "px")
@@ -137,7 +137,7 @@
 
 			items.append("img")
 			.attr("class", "item-image")
-			.attr("src", (d) => d.photos[0])
+			.attr("src", (d) => d.photos[0].path)
     }
     
 		const rotateGlobe = () => {

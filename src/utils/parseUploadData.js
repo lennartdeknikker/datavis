@@ -9,16 +9,16 @@ const testFileData = {
   size: 3697475
 }
 
-const parseUploadData = (name, dateOfBirth, location, file) => {
+const parseUploadData = (name, dateOfBirth, latitude, longitude, file) => {
 
   const parsedFile = {
     name: name,
     dateOfBirth: dateOfBirth,
-    location: location,
+    location: [longitude, latitude],
     photos: [
       {
         name: file.filename,
-        path: file.path,
+        path: file.path.split("static/")[1],
         mimetype: file.mimetype,
         size: file.size
       }

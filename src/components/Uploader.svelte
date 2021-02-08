@@ -1,10 +1,12 @@
 <script>
 
-  let location = ''
+  let latitude = ''
+  let longitude = ''
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-    location = `${position.coords.latitude}, ${position.coords.longitude}`
+    latitude = position.coords.latitude
+    longitude = position.coords.longitude
   });
   }
 </script>
@@ -19,11 +21,16 @@
       <input type="date" name="dateOfBirth" />
     </fieldset>
     <fieldset>
-      <legend>About your fridge</legend>
+      <legend>Your fridge</legend>
       <label for="picture">Photo:</label>
       <input type="file" name="picture" />
-      <label for="location">Location:</label>
-      <input type="text" name="location" value={location} readonly>
+    </fieldset>
+    <fieldset>
+      <legend>Location</legend>
+      <label for="latitude">Latitude:</label>
+      <input type="text" name="latitude" value={latitude} readonly>
+      <label for="longitude">Longitude:</label>
+      <input type="text" name="longitude" value={longitude} readonly>
       <input type="button" on:click={getLocation} value="get location">
     </fieldset>
     <input type="submit" value="send">
