@@ -9,11 +9,12 @@ const testFileData = {
   size: 3697475
 }
 
-const parseUploadData = (name, dateOfBirth, file) => {
+const parseUploadData = (name, dateOfBirth, location, file) => {
 
   const parsedFile = {
     name: name,
     dateOfBirth: dateOfBirth,
+    location: location,
     photos: [
       {
         name: file.filename,

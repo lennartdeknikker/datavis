@@ -73,6 +73,19 @@
         "mimetype": "image/jpeg",
         "size": 3697475
       }
+    },
+    {
+      "name": "lennart",
+      "dateOfBirth": "2021-02-05",
+      "location": "52.0773243, 5.093195",
+      "photos": [
+        {
+          "name": "1612814398667_2021-02-05_lennart.jpg",
+          "path": "static/images/upload/1612814398667_2021-02-05_lennart.jpg",
+          "mimetype": "image/jpeg",
+          "size": 3697475
+        }
+      ]
     }
   ]
 }
