@@ -17,5 +17,5 @@
 </svelte:head>
 
 <div>
-	<Globe />
+	<Uploader />
 </div>

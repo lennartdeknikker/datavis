@@ -1,0 +1,34 @@
+{
+  "fridges": [
+    {
+      "fieldname": "picture",
+      "originalname": "IMG_20210201_231136.jpg",
+      "encoding": "7bit",
+      "mimetype": "image/jpeg",
+      "destination": "./static/images/upload",
+      "filename": "1612806021021_2021-02-12_lennart.jpg",
+      "path": "static/images/upload/1612806021021_2021-02-12_lennart.jpg",
+      "size": 2146448
+    },
+    {
+      "fieldname": "picture",
+      "originalname": "IMG_20210201_231136.jpg",
+      "encoding": "7bit",
+      "mimetype": "image/jpeg",
+      "destination": "./static/images/upload",
+      "filename": "1612806098684_2021-02-12_lennart.jpg",
+      "path": "static/images/upload/1612806098684_2021-02-12_lennart.jpg",
+      "size": 2146448
+    },
+    {
+      "fieldname": "picture",
+      "originalname": "WhatsApp Image 2021-02-02 at 11.52.07.jpeg",
+      "encoding": "7bit",
+      "mimetype": "image/jpeg",
+      "destination": "./static/images/upload",
+      "filename": "1612806124407_2021-02-05_lennart.jpeg",
+      "path": "static/images/upload/1612806124407_2021-02-05_lennart.jpeg",
+      "size": 132219
+    }
+  ]
+}
