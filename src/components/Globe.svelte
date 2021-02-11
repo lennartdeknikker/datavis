@@ -1,9 +1,11 @@
 <script>
-	import {getBaseValues, updatePosition, updateMaxDimensions, updateAllItems} from '../utils/globe'
+	import {getBaseValues, updatePosition, updateMaxDimensions, updateAllItems} from '../utils/globeItemFunctions'
 	import * as d3 from "d3";
   import { onMount } from 'svelte'
   import data from '../data/test.json'
   import geoJson from '../data/map.json'
+	// source: https://ourworldindata.org/diet-compositions#diet-compositions-by-food-groups
+	import dietData from '../data/diet.json'
 
 	onMount(() => {
 		let mapWidth = d3.select("#map").node().getBoundingClientRect().width
@@ -31,14 +33,6 @@
 			.attr("r", initialScale)
 
 		const baseValues = getBaseValues()
-    console.log('🚀 ~ baseValues', baseValues)
-
-		const maxValue = 50
-		const shrinkage = 0.8
-		const globeDimensions = globe.node().getBoundingClientRect();
-		const globeCenterX = globeDimensions.left + globeDimensions.width / 2
-		const globeCenterY = globeDimensions.top + globeDimensions.height / 2
-		const maxDistance = globeDimensions.width / 2
 
 		svg
 			.call(d3.drag().on('drag', function (event) {
@@ -74,6 +68,10 @@
 				.enter().append("path")
 				.attr("class", "country")
 				.attr("d", path)
+				.attr("fill", (d, i) => {
+					const item = dietData.find(item => item.entity === d.properties.name)
+          console.log('🚀 ~ item', item?.cereals)
+				})
 		}
 
 		const addItems = () => {
@@ -91,12 +89,12 @@
 				thisItem
 				.style("max-width", "100px")
 				.style("max-height", "100px")
-				updatePosition(projection, thisItem.node())
+				updatePosition(baseValues, projection, thisItem.node())
 			})		
 			.on("mouseout", function () {
 				const thisItem = d3.select(this)
 				updateMaxDimensions(baseValues, thisItem.node())
-				updatePosition(projection, thisItem.node())
+				updatePosition(baseValues, projection, thisItem.node())
 			})
 			.on("click", (d, i) => {
 				console.log(d)

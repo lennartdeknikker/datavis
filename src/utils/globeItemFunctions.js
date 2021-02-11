@@ -1,26 +1,30 @@
+import * as d3 from "d3";
+
 const getBaseValues = () => {
   const globe = document.querySelector('.globe')
   const globeDimensions = globe.getBoundingClientRect()
   return {
     maxValue: 50,
     shrinkage: 0.8,
+    globeWidth: globeDimensions.width,
+    globeHeight: globeDimensions.height,
     globeCenterX: globeDimensions.left + globeDimensions.width / 2,
     globeCenterY: globeDimensions.top + globeDimensions.height / 2,
     maxDistance: globeDimensions.width / 2
   }
 }
 
-const updatePosition = (projection, item) => {
+const updatePosition = (baseValues, projection, item) => {
   const correction = item.getBoundingClientRect().width / 2
   const itemCoordinates = projection([item.dataset.latitude, item.dataset.longitude])
   item.style.left = `${itemCoordinates[0] - correction}px`
   item.style.top = `${itemCoordinates[1] - correction}px`
 }
 
-const updatePositionForAllItems = (projection) => {
+const updatePositionForAllItems = (baseValues, projection) => {
   const items = document.querySelectorAll('.item')
   items.forEach(item => {
-    updatePosition(projection, item)
+    updatePosition(baseValues, projection, item)
   })
 }
 
@@ -47,7 +51,7 @@ const updateMaxDimensionsForAllItems = (baseValues) => {
 
 const updateAllItems = (baseValues, projection) => {
   updateMaxDimensionsForAllItems(baseValues)
-  updatePositionForAllItems(projection)
+  updatePositionForAllItems(baseValues, projection)
 }
 
 export {getBaseValues, updatePosition, updatePositionForAllItems, updateMaxDimensions, updateMaxDimensionsForAllItems, updateAllItems}

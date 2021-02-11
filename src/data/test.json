@@ -5,7 +5,7 @@
       "dateOfBirth": "2021-02-20",
       "location": [
         "4.939744",
-        "52.3560247"
+        "20.3560247"
       ],
       "photos": [
         {
@@ -13,38 +13,6 @@
           "path": "images/upload/1613068568670_2021-02-20_lennart.jpeg",
           "mimetype": "image/jpeg",
           "size": 119531
-        }
-      ]
-    },
-    {
-      "name": "Lennart",
-      "dateOfBirth": "2021-02-20",
-      "location": [
-        "4.939744",
-        "16.3560247"
-      ],
-      "photos": [
-        {
-          "name": "1613068568670_2021-02-20_lennart.jpeg",
-          "path": "images/upload/1613068568670_2021-02-20_lennart.jpeg",
-          "mimetype": "image/jpeg",
-          "size": 119531
-        }
-      ]
-    },
-    {
-      "name": "Barbara",
-      "dateOfBirth": "2021-02-14",
-      "location": [
-        "4.9397822",
-        "40.356006"
-      ],
-      "photos": [
-        {
-          "name": "1613068613541_2021-02-14_barbara.png",
-          "path": "images/upload/1613068613541_2021-02-14_barbara.png",
-          "mimetype": "image/png",
-          "size": 305421
         }
       ]
     }
