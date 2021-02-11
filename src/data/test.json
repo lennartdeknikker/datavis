@@ -1,64 +1,32 @@
 {
   "fridges": [
     {
-      "name": "len",
-      "dateOfBirth": "2021-02-06",
+      "name": "Lennart",
+      "dateOfBirth": "2021-02-20",
       "location": [
-        "52.077327399999994",
-        "5.0932298"
+        "4.939744",
+        "52.3560247"
       ],
       "photos": [
         {
-          "name": "1612814753138_2021-02-06_len.jpg",
-          "path": "static/images/upload/1612814753138_2021-02-06_len.jpg",
+          "name": "1613068568670_2021-02-20_lennart.jpeg",
+          "path": "images/upload/1613068568670_2021-02-20_lennart.jpeg",
           "mimetype": "image/jpeg",
-          "size": 2146448
-        }
-      ]
-    },
-    {
-      "name": "lennart",
-      "dateOfBirth": "2021-02-06",
-      "location": [
-        "52.0773513",
-        "5.093214199999999"
-      ],
-      "photos": [
-        {
-          "name": "1612814886187_2021-02-06_lennart.jpg",
-          "path": "static/images/upload/1612814886187_2021-02-06_lennart.jpg",
-          "mimetype": "image/jpeg",
-          "size": 2146448
-        }
-      ]
-    },
-    {
-      "name": "lennart",
-      "dateOfBirth": "2021-02-13",
-      "location": [
-        "52.0773504",
-        "5.0932033"
-      ],
-      "photos": [
-        {
-          "name": "1612814937630_2021-02-13_lennart.jpg",
-          "path": "static/images/upload/1612814937630_2021-02-13_lennart.jpg",
-          "mimetype": "image/jpeg",
-          "size": 3697475
+          "size": 119531
         }
       ]
     },
     {
       "name": "Lennart",
-      "dateOfBirth": "2021-02-11",
+      "dateOfBirth": "2021-02-20",
       "location": [
-        "52.077308900000006",
-        "5.0932195"
+        "4.939744",
+        "16.3560247"
       ],
       "photos": [
         {
-          "name": "1612815389307_2021-02-11_lennart.jpeg",
-          "path": "images/upload/1612815389307_2021-02-11_lennart.jpeg",
+          "name": "1613068568670_2021-02-20_lennart.jpeg",
+          "path": "images/upload/1613068568670_2021-02-20_lennart.jpeg",
           "mimetype": "image/jpeg",
           "size": 119531
         }
@@ -66,17 +34,17 @@
     },
     {
       "name": "Barbara",
-      "dateOfBirth": "1995-12-29",
+      "dateOfBirth": "2021-02-14",
       "location": [
-        "5.0932164",
-        "52.077339599999995"
+        "4.9397822",
+        "40.356006"
       ],
       "photos": [
         {
-          "name": "1612815613661_1995-12-29_barbara.jpeg",
-          "path": "images/upload/1612815613661_1995-12-29_barbara.jpeg",
-          "mimetype": "image/jpeg",
-          "size": 119531
+          "name": "1613068613541_2021-02-14_barbara.png",
+          "path": "images/upload/1613068613541_2021-02-14_barbara.png",
+          "mimetype": "image/png",
+          "size": 305421
         }
       ]
     }

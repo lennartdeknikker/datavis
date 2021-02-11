@@ -8,30 +8,36 @@
   import geoJson from '../data/map.json'
 
 	onMount(() => {
-		let width = d3.select("#map").node().getBoundingClientRect().width
-    console.log('🚀 ~ width', width)
-		let height = d3.select("#map").node().getBoundingClientRect().height
+		let mapWidth = d3.select("#map").node().getBoundingClientRect().width
+		let mapHeight = d3.select("#map").node().getBoundingClientRect().height
 		let sensitivity = 75
 
 		let projection = d3.geoOrthographic()
 			.scale(250)
 			.center([0, 0])
 			.rotate([0,-30])
-			.translate([width / 2, height / 2])
+			.translate([mapWidth / 2, mapHeight / 2])
 
 		const initialScale = projection.scale()
 		let path = d3.geoPath().projection(projection)
 
 		let svg = d3.select('#map')
 			.append("svg")
-			.attr("width", width)
-			.attr("height", height)
+			.attr("width", mapWidth)
+			.attr("height", mapHeight)
 
 		let globe = svg.append("circle")
 			.attr('class', 'globe')
-			.attr("cx", width/2)
-			.attr("cy", height/2)
+			.attr("cx", mapWidth/2)
+			.attr("cy", mapHeight/2)
 			.attr("r", initialScale)
+
+			const maxValue = 50
+			const shrinkage = 0.8
+			const globeDimensions = globe.node().getBoundingClientRect();
+			const globeCenterX = globeDimensions.left + globeDimensions.width / 2
+			const globeCenterY = globeDimensions.top + globeDimensions.height / 2
+			const maxDistance = globeDimensions.width / 2
 
 		svg
 			.call(d3.drag().on('drag', function (event) {
@@ -58,48 +64,47 @@
 				}
 			}))
 
-		const updatePosition = (items) => {
-			items
-				.style("left", function (d) {
-					const correction = this.getBoundingClientRect().width / 2
-					return projection(d.location)[0] - correction + "px"
-				})
-				.style("top", function (d) {
-					const correction = this.getBoundingClientRect().height / 2
-					return projection(d.location)[1] - correction + "px"
-				})
+		const updatePosition = item => {
+			const correction = item.getBoundingClientRect().width / 2
+			const coordinates = [item.dataset.latitude, item.dataset.longitude]
+			console.log('🚀 ~ coordinates', coordinates)
+			const itemCoordinates = projection(coordinates)
+			item.style.left = `${itemCoordinates[0] - correction}px`
+			item.style.top = `${itemCoordinates[1] - correction}px`
 		}
 
-		const updateMaxWidth = (items) => {
-			let maxWidth = '0px'
-			items
-				.style("max-width", function () {
-					const maxHeight = 50
-					const shrinkage = 0.8
+		const updatePositionForAllItems = () => {
+			const items = document.querySelectorAll('.item')
+			items.forEach(item => {
+				updatePosition(item)
+			})
+		}
 
-					const globe = d3.select('.globe').node().getBoundingClientRect();
-					const globeCenterX = globe.left + globe.width / 2
-					const globeCenterY = globe.top + globe.height / 2
-					const maxDistance = globe.width / 2
+		const updateMaxDimensions = item => {
+			const itemDimensions = item.getBoundingClientRect()
+			const itemCenterX = itemDimensions.left + itemDimensions.width / 2
+			const itemCenterY = itemDimensions.top + itemDimensions.height / 2
 
-					const item = d3.select(this).node().getBoundingClientRect()
-					const itemCenterX = item.left + item.width / 2
-					const itemCenterY = item.top + item.height / 2
+			const xDifference = Math.abs(itemCenterX - globeCenterX)
+			const yDifference = Math.abs(globeCenterY - itemCenterY)
+			const distance = Math.sqrt((xDifference * xDifference) + (yDifference * yDifference))
+			const max = `${maxValue - (maxValue * shrinkage * (distance / maxDistance))}px`
 
-					const xDifference = Math.abs(itemCenterX - globeCenterX)
-					const yDifference = Math.abs(globeCenterY - itemCenterY)
-					const distance = Math.sqrt((xDifference * xDifference) + (yDifference * yDifference))
-					maxWidth = `${maxHeight - (maxHeight * shrinkage * (distance / maxDistance))}px`				
-					return maxWidth
-				})
-				.style("max-height", maxWidth)
-				
+			item.style.maxWidth = max	
+			item.style.maxHeight = max
+		}
+
+		const updateMaxDimensionsForAllItems = () => {
+			const items = document.querySelectorAll('.item')
+			items.forEach(item => {
+				updateMaxDimensions(item)	
+			});
 		}
 
 		const updateAllItemPositions = () => {
 			const items = d3.selectAll('.item')
-			updateMaxWidth(items)
-			updatePosition(items)
+			updateMaxDimensionsForAllItems()
+			updatePositionForAllItems(items)
 		}
 
 
@@ -120,6 +125,8 @@
       .data(data.fridges)
 			.enter().append("div")
 			.attr("class", "item")
+			.attr("data-latitude", d => d.location[0])
+			.attr("data-longitude", d => d.location[1])
 			.style("left", d => projection(d.location)[0] - 25 + "px")
 			.style("top", d => projection(d.location)[1] - 25 + "px")
 			.on("mouseover", function () {
@@ -127,13 +134,16 @@
 				thisItem
 				.style("max-width", "100px")
 				.style("max-height", "100px")
-				updatePosition(thisItem)
+				updatePosition(thisItem.node())
 			})		
 			.on("mouseout", function () {
 				const thisItem = d3.select(this)
-				updateMaxWidth(thisItem)
-				updatePosition(thisItem)
+				updateMaxDimensions(thisItem.node())
+				updatePosition(thisItem.node())
 			})
+			.on("click", (d, i) => {
+				console.log(d)
+			} )
 
 			items.append("img")
 			.attr("class", "item-image")
@@ -189,6 +199,7 @@
 		max-height: 50px;
 		display: flex;
 		border: 2px solid #9db3b0;
+		cursor: pointer;
 	}
 
 	:global(.item-image) {
