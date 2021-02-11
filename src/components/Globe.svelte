@@ -1,7 +1,5 @@
 <script>
-	let title = 'test title'
-	let src = 'test'
-	let alt = 'test'
+	import {getBaseValues, updatePosition, updateMaxDimensions, updateAllItems} from '../utils/globe'
 	import * as d3 from "d3";
   import { onMount } from 'svelte'
   import data from '../data/test.json'
@@ -32,12 +30,15 @@
 			.attr("cy", mapHeight/2)
 			.attr("r", initialScale)
 
-			const maxValue = 50
-			const shrinkage = 0.8
-			const globeDimensions = globe.node().getBoundingClientRect();
-			const globeCenterX = globeDimensions.left + globeDimensions.width / 2
-			const globeCenterY = globeDimensions.top + globeDimensions.height / 2
-			const maxDistance = globeDimensions.width / 2
+		const baseValues = getBaseValues()
+    console.log('🚀 ~ baseValues', baseValues)
+
+		const maxValue = 50
+		const shrinkage = 0.8
+		const globeDimensions = globe.node().getBoundingClientRect();
+		const globeCenterX = globeDimensions.left + globeDimensions.width / 2
+		const globeCenterY = globeDimensions.top + globeDimensions.height / 2
+		const maxDistance = globeDimensions.width / 2
 
 		svg
 			.call(d3.drag().on('drag', function (event) {
@@ -49,64 +50,20 @@
 				])
 				path = d3.geoPath().projection(projection)
 				svg.selectAll("path").attr("d", path)
-				updateAllItemPositions(projection)
+				updateAllItems(baseValues, projection)
 			}))
 			.call(d3.zoom().on('zoom', function (event) {
 				if(event.transform.k > 0.3) {
 					projection.scale(initialScale * event.transform.k)
 					path = d3.geoPath().projection(projection)
 					svg.selectAll("path").attr("d", path)
-					updateAllItemPositions(projection)
+					updateAllItems(baseValues, projection)
 					globe.attr("r", projection.scale())
 				}
 				else {
 					event.transform.k = 0.3
 				}
 			}))
-
-		const updatePosition = item => {
-			const correction = item.getBoundingClientRect().width / 2
-			const coordinates = [item.dataset.latitude, item.dataset.longitude]
-			console.log('🚀 ~ coordinates', coordinates)
-			const itemCoordinates = projection(coordinates)
-			item.style.left = `${itemCoordinates[0] - correction}px`
-			item.style.top = `${itemCoordinates[1] - correction}px`
-		}
-
-		const updatePositionForAllItems = () => {
-			const items = document.querySelectorAll('.item')
-			items.forEach(item => {
-				updatePosition(item)
-			})
-		}
-
-		const updateMaxDimensions = item => {
-			const itemDimensions = item.getBoundingClientRect()
-			const itemCenterX = itemDimensions.left + itemDimensions.width / 2
-			const itemCenterY = itemDimensions.top + itemDimensions.height / 2
-
-			const xDifference = Math.abs(itemCenterX - globeCenterX)
-			const yDifference = Math.abs(globeCenterY - itemCenterY)
-			const distance = Math.sqrt((xDifference * xDifference) + (yDifference * yDifference))
-			const max = `${maxValue - (maxValue * shrinkage * (distance / maxDistance))}px`
-
-			item.style.maxWidth = max	
-			item.style.maxHeight = max
-		}
-
-		const updateMaxDimensionsForAllItems = () => {
-			const items = document.querySelectorAll('.item')
-			items.forEach(item => {
-				updateMaxDimensions(item)	
-			});
-		}
-
-		const updateAllItemPositions = () => {
-			const items = d3.selectAll('.item')
-			updateMaxDimensionsForAllItems()
-			updatePositionForAllItems(items)
-		}
-
 
 		const loadMap = () => {
 			let map = svg.append("g")
@@ -134,12 +91,12 @@
 				thisItem
 				.style("max-width", "100px")
 				.style("max-height", "100px")
-				updatePosition(thisItem.node())
+				updatePosition(projection, thisItem.node())
 			})		
 			.on("mouseout", function () {
 				const thisItem = d3.select(this)
-				updateMaxDimensions(thisItem.node())
-				updatePosition(thisItem.node())
+				updateMaxDimensions(baseValues, thisItem.node())
+				updatePosition(projection, thisItem.node())
 			})
 			.on("click", (d, i) => {
 				console.log(d)
@@ -160,7 +117,7 @@
 				])
 				path = d3.geoPath().projection(projection)
 				svg.selectAll("path").attr("d", path)
-				updateAllItemPositions(projection)
+				updateAllItems(baseValues, projection)
 			},200)
 		}
 
