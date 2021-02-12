@@ -19,7 +19,8 @@
 			const domain = getDomain(value)
 			const colorScale = d3.scaleLinear().domain(domain).range(["white", color])
 			const countries = d3.selectAll('.country')
-			countries.style("fill", (d, i) => {
+			countries
+				.transition().duration(300).style("fill", (d, i) => {
 					const item = dietData.find(item => item.entity === d.properties.name)
 					return colorScale(item?.[value])
 				})
