@@ -8,6 +8,23 @@
 	import dietData from '../data/diet.json'
 
 	onMount(() => {
+		const getMaxValue = value =>  Math.max.apply(Math, dietData.map((o) => o?.[value] ))
+		const getMinValue = value =>  Math.min.apply(Math, dietData.map((o) => o?.[value] ))
+		const getDomain = value => [getMinValue(value), getMaxValue(value)]
+		const scaleStops = [500, 1000, 1500, 2000, 2500, 3000]
+
+		const changeFills = (value) => {
+			const domain = getDomain(value)
+			const colorScale = d3.scaleLinear().domain(domain).range(["white", "blue"])
+			const countries = d3.selectAll('.country')
+			countries.style("fill", (d, i) => {
+					const item = dietData.find(item => item.entity === d.properties.name)
+          console.log('🚀 ~ item', item?.[value])
+					return colorScale(item?.[value])
+				})
+		}
+
+
 		let mapWidth = d3.select("#map").node().getBoundingClientRect().width
 		let mapHeight = d3.select("#map").node().getBoundingClientRect().height
 		let sensitivity = 75
@@ -68,10 +85,6 @@
 				.enter().append("path")
 				.attr("class", "country")
 				.attr("d", path)
-				.attr("fill", (d, i) => {
-					const item = dietData.find(item => item.entity === d.properties.name)
-          console.log('🚀 ~ item', item?.cereals)
-				})
 		}
 
 		const addItems = () => {
@@ -122,6 +135,7 @@
 			loadMap()
 			// rotateGlobe()
 			addItems()
+		changeFills('cereals')
 	})
 </script>
 
