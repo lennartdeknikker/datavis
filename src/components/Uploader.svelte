@@ -42,8 +42,5 @@
     display: flex;
     flex-direction: column;
     width: 200px;
-    position: fixed;
-    left: 0;
-    top: 0;
   }
 </style>

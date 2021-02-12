@@ -4,7 +4,7 @@
 
 <div class="Scale-container">
   <span>0</span>
-  <div class="Scale" style={`width: ${$percentageOfTotalConsumption}%;`}/>
+  <div class="Scale" style={`width: calc(${$percentageOfTotalConsumption}% - 240px);`}/>
   <span>{$maxForActiveCategory} (kcal per person per day)</span>
 </div>
 
@@ -26,6 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 240px;
   }
 
   .Scale {

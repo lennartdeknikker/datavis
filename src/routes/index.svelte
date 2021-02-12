@@ -2,6 +2,9 @@
 	import Nav from '../components/Nav.svelte';
 	import Visualisation from '../components/Visualisation.svelte'
 	import Scale from '../components/scale.svelte';
+	import AddButton from '../components/AddButton.svelte';
+	import {showAddModal} from '../stores'
+import AddModal from '../components/AddModal.svelte';
 </script>
 
 <style>
@@ -19,4 +22,8 @@
 	<Nav />
 	<Scale />
 	<Visualisation />
+	<AddButton />
+	{#if $showAddModal}
+		<AddModal />
+	{/if}
 </div>
