@@ -1,5 +1,5 @@
 <script>
-	import { activeCategoryId } from '../stores'
+	import { activeCategoryId, maxForActiveCategory, totalConsumption, totalForActiveCategory } from '../stores'
 	import {getBaseValues, updatePosition, updateMaxDimensions, updateAllItems} from '../utils/globeItemFunctions'
 	import * as d3 from "d3";
   import { onMount } from 'svelte'
@@ -12,8 +12,23 @@
 		const getDomain = value => {
 			const maxValue = Math.max.apply(Math, dietData.map((o) => o?.[value] ))
 			const roundedByFiveHundred = Math.ceil(maxValue / 500) * 500
+			maxForActiveCategory.set(roundedByFiveHundred)
 			return [0, roundedByFiveHundred]
 		}
+
+		const calculateTotalIntakeForCategory = (category) => {
+			return dietData.reduce((acc, curr) => acc + curr?.[category], 0)
+		}
+
+		const calculateTotalIntakeForAllCategories = () => {
+			let acc = 0
+			for ( const category in dietData[0]) {
+				if (!['entity', 'year', 'code'].includes(category)) acc += calculateTotalIntakeForCategory(category)
+			}
+			return acc
+		}
+
+
 
 		const changeFills = (value, color) => {
 			const domain = getDomain(value)
@@ -136,11 +151,19 @@
 			loadMap()
 			// rotateGlobe()
 			addItems()
-			activeCategoryId.subscribe(value => changeFills(value, 'blue'))
+			activeCategoryId.subscribe(value => {changeFills(value, 'blue'); totalForActiveCategory.set(calculateTotalIntakeForCategory(value))})
+			totalConsumption.set(calculateTotalIntakeForAllCategories())
 	})
 </script>
 
 <style>
+	.visualisation {
+		min-width: 500px;
+		min-height: 500px;
+		width: 100vw;
+		height: calc(100vh - 30px);
+	}
+
 	#map {
 		width: 100%;
 		height: 100%;
@@ -178,5 +201,7 @@
 	}
 </style>
 
-<div id="map">
+<div class="visualisation">
+	<div id="map">
+	</div>
 </div>

@@ -57,6 +57,9 @@
 <style>
   nav {
     width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   ul {
@@ -82,6 +85,7 @@
     text-align: center;
     color: white;
     cursor: pointer;
+    transition: background-color 300ms ease;
   }
 
   li.active {

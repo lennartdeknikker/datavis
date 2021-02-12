@@ -1,21 +1,22 @@
 <script>
-	import Globe from '../components/Globe.svelte'
-import Nav from '../components/Nav.svelte';
+	import Nav from '../components/Nav.svelte';
+	import Visualisation from '../components/Visualisation.svelte'
+	import Scale from '../components/scale.svelte';
 </script>
 
 <style>
-	.visualisation {
-		min-width: 500px;
-		min-height: 500px;
-		width: 100vw;
-		height: calc(100vh - 30px);
+	div {
+		overflow: hidden;
+		max-width: 100vw;
 	}
 </style>
 
 <svelte:head>
 	<title>Fridges around the world</title>
 </svelte:head>
-<Nav />
-<div class="visualisation">
-	<Globe />
+
+<div>
+	<Nav />
+	<Scale />
+	<Visualisation />
 </div>

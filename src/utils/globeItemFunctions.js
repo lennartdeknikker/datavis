@@ -10,7 +10,7 @@ const getBaseValues = () => {
     globeHeight: globeDimensions.height,
     globeCenterX: globeDimensions.left + globeDimensions.width / 2,
     globeCenterY: globeDimensions.top + globeDimensions.height / 2,
-    maxDistance: globeDimensions.width / 2
+    maxDistance: globeDimensions.width / 2,
   }
 }
 
