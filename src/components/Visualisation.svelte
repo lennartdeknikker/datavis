@@ -117,19 +117,42 @@
 			.style("left", d => projection(d.location)[0] - 25 + "px")
 			.style("top", d => projection(d.location)[1] - 25 + "px")
 			.on("mouseover", function () {
-				const thisItem = d3.select(this)
-				thisItem
-				.style("max-width", "100px")
-				.style("max-height", "100px")
-				updatePosition(baseValues, projection, thisItem.node())
+				const thisItem = d3.select(this).node()
+				if (thisItem.dataset.clicked !== "true") {
+					thisItem.style.maxWidth = "55px"
+					thisItem.style.maxHeight = "55px"
+					updatePosition(baseValues, projection, thisItem)
+				}
 			})		
 			.on("mouseout", function () {
-				const thisItem = d3.select(this)
-				updateMaxDimensions(baseValues, thisItem.node())
-				updatePosition(baseValues, projection, thisItem.node())
+				const thisItem = d3.select(this).node()
+				if (thisItem.dataset.clicked !== "true") {
+					updateMaxDimensions(baseValues, thisItem)
+					updatePosition(baseValues, projection, thisItem)
+				}
 			})
-			.on("click", (d, i) => {
-				console.log(d)
+			.on("click", function (d, i) {
+				const thisItem = d3.select(this).node()
+
+				// unclick other items
+				const otherClickedElement = document.querySelector(`[data-clicked="true"]`)
+				if (otherClickedElement && otherClickedElement !== thisItem) {
+					otherClickedElement.dataset.clicked = "false"
+					otherClickedElement.classList.remove('clicked')
+					updateMaxDimensions(baseValues, otherClickedElement)
+					updatePosition(baseValues, projection, otherClickedElement)
+				}
+				if (thisItem.dataset.clicked === "true") {
+					thisItem.dataset.clicked = "false"
+					thisItem.classList.remove('clicked')
+					updateMaxDimensions(baseValues, thisItem)
+				} else {
+					thisItem.dataset.clicked = "true"
+					thisItem.classList.add('clicked')
+					thisItem.style.maxWidth = null
+					thisItem.style.maxHeight = null
+				}
+				updatePosition(baseValues, projection, thisItem)
 			} )
 
 			items.append("img")
@@ -196,6 +219,13 @@
 		display: flex;
 		border: 2px solid #9db3b0;
 		cursor: pointer;
+	}
+
+	:global(.item.clicked) {
+		z-index: 2;
+		border: 10px solid blue;
+		max-width: 300px;
+		max-height: 300px;
 	}
 
 	:global(.item-image) {

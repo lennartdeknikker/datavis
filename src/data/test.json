@@ -15,6 +15,22 @@
           "size": 119531
         }
       ]
+    },
+    {
+      "name": "Piet",
+      "dateOfBirth": "2021-02-20",
+      "location": [
+        "4.939744",
+        "40.3560247"
+      ],
+      "photos": [
+        {
+          "name": "1613068568670_2021-02-20_lennart.jpeg",
+          "path": "images/upload/1613068568670_2021-02-20_lennart.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 119531
+        }
+      ]
     }
   ]
 }
