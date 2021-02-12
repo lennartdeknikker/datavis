@@ -9,6 +9,7 @@
 	import dietData from '../data/diet.json'
 
 	onMount(() => {
+		let rotator
 		const getDomain = value => {
 			const maxValue = Math.max.apply(Math, dietData.map((o) => o?.[value] ))
 			const roundedByFiveHundred = Math.ceil(maxValue / 500) * 500
@@ -69,6 +70,7 @@
 
 		svg
 			.call(d3.drag().on('drag', function (event) {
+				rotator?.stop()
 				const rotate = projection.rotate()
 				const k = sensitivity / projection.scale()
 				projection.rotate([
@@ -80,6 +82,7 @@
 				updateAllItems(baseValues, projection)
 			}))
 			.call(d3.zoom().on('zoom', function (event) {
+				rotator?.stop()
 				if(event.transform.k > 0.3) {
 					projection.scale(initialScale * event.transform.k)
 					path = d3.geoPath().projection(projection)
@@ -135,7 +138,7 @@
     }
     
 		const rotateGlobe = () => {
-			d3.timer(() => {
+			rotator = d3.timer(() => {
 				const rotate = projection.rotate()
 				const k = sensitivity / projection.scale()
 				projection.rotate([
@@ -149,7 +152,7 @@
 		}
 
 			loadMap()
-			// rotateGlobe()
+			rotateGlobe()
 			addItems()
 			activeCategoryId.subscribe(value => {changeFills(value, 'blue'); totalForActiveCategory.set(calculateTotalIntakeForCategory(value))})
 			totalConsumption.set(calculateTotalIntakeForAllCategories())

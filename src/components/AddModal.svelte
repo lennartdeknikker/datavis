@@ -47,5 +47,11 @@ import { showAddModal } from '../stores'
     height: 40px;
     font-size: 1.2em;
     cursor: pointer;
+    transition: color .2s ease;
   }
+
+  button:hover {
+    color: rgb(78, 78, 248);
+  }
+
 </style>
