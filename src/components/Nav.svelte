@@ -48,7 +48,7 @@
 
 <nav>
   <ul>
-    {#each categories as category, index}
+    {#each categories as category}
     <li class:active="{category.id === $activeCategoryId}" on:click={() => activeCategoryId.set(category.id)}>{category.label}</li>
     {/each}
   </ul>

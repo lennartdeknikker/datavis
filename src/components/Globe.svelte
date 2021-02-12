@@ -1,4 +1,5 @@
 <script>
+	import { activeCategoryId } from '../stores'
 	import {getBaseValues, updatePosition, updateMaxDimensions, updateAllItems} from '../utils/globeItemFunctions'
 	import * as d3 from "d3";
   import { onMount } from 'svelte'
@@ -23,7 +24,6 @@
 					return colorScale(item?.[value])
 				})
 		}
-
 
 		let mapWidth = d3.select("#map").node().getBoundingClientRect().width
 		let mapHeight = d3.select("#map").node().getBoundingClientRect().height
@@ -135,7 +135,7 @@
 			loadMap()
 			// rotateGlobe()
 			addItems()
-			changeFills('sugar', 'blue')
+			activeCategoryId.subscribe(value => changeFills(value, 'blue'))
 	})
 </script>
 
