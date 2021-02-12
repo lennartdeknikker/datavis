@@ -1,21 +1,21 @@
 <script>
 	import Globe from '../components/Globe.svelte'
-	import Uploader from '../components/Uploader.svelte';
+import Nav from '../components/Nav.svelte';
 </script>
 
 <style>
-	div {
+	.visualisation {
 		min-width: 500px;
 		min-height: 500px;
 		width: 100vw;
-		height: 500px;
+		height: calc(100vh - 30px);
 	}
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>Fridges around the world</title>
 </svelte:head>
-
-<div>
+<Nav />
+<div class="visualisation">
 	<Globe />
 </div>

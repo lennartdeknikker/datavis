@@ -1,60 +1,91 @@
 <script>
-	export let segment;
+  import { activeCategoryId } from '../stores'
+
+  const categories = [
+    {
+      id: 'cereals',
+      label: 'Cereals & Grains'
+    },
+    {
+      id: 'pulses',
+      label: 'Pulses'
+    },
+    {
+      id: 'starchy_roots',
+      label: 'Starchy Roots'
+    },
+    {
+      id: 'sugar',
+      label: 'Sugar'
+    },
+    {
+      id: 'oils_and_fats',
+      label: 'Oils & Fats'
+    },
+    {
+      id: 'meat',
+      label: 'Meat'
+    },
+    {
+      id: 'dairy_and_eggs',
+      label: 'Dairy & Eggs'
+    },
+    {
+      id: 'fruit_and_vegetables',
+      label: 'Fruit & Vegetables'
+    },
+    {
+      id: 'other',
+      label: 'Other'
+    },
+    {
+      id: 'alcoholic_beverages',
+      label: 'Alcoholic beverages'
+    }
+  ]
+
 </script>
 
-<style>
-	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
-	}
-
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
-
-	li {
-		display: block;
-		float: left;
-	}
-
-	[aria-current] {
-		position: relative;
-		display: inline-block;
-	}
-
-	[aria-current]::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
-	}
-</style>
-
 <nav>
-	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
-		<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>
-
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li>
-	</ul>
+  <ul>
+    {#each categories as category, index}
+    <li class:active="{category.id === $activeCategoryId}" on:click={() => activeCategoryId.set(category.id)}>{category.label}</li>
+    {/each}
+  </ul>
 </nav>
+
+<style>
+  nav {
+    width: 100vw;
+  }
+
+  ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    background-color: rgb(183, 183, 255);
+    display: flex;
+    height: 70px;
+    width: 150px;
+    padding: 10px;
+    margin: 2px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+  }
+
+  li.active {
+    background-color: rgb(111, 111, 252);
+    color: white;
+  }
+</style>

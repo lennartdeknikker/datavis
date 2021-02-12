@@ -8,18 +8,18 @@
 	import dietData from '../data/diet.json'
 
 	onMount(() => {
-		const getMaxValue = value =>  Math.max.apply(Math, dietData.map((o) => o?.[value] ))
-		const getMinValue = value =>  Math.min.apply(Math, dietData.map((o) => o?.[value] ))
-		const getDomain = value => [getMinValue(value), getMaxValue(value)]
-		const scaleStops = [500, 1000, 1500, 2000, 2500, 3000]
+		const getDomain = value => {
+			const maxValue = Math.max.apply(Math, dietData.map((o) => o?.[value] ))
+			const roundedByFiveHundred = Math.ceil(maxValue / 500) * 500
+			return [0, roundedByFiveHundred]
+		}
 
-		const changeFills = (value) => {
+		const changeFills = (value, color) => {
 			const domain = getDomain(value)
-			const colorScale = d3.scaleLinear().domain(domain).range(["white", "blue"])
+			const colorScale = d3.scaleLinear().domain(domain).range(["white", color])
 			const countries = d3.selectAll('.country')
 			countries.style("fill", (d, i) => {
 					const item = dietData.find(item => item.entity === d.properties.name)
-          console.log('🚀 ~ item', item?.[value])
 					return colorScale(item?.[value])
 				})
 		}
@@ -135,14 +135,14 @@
 			loadMap()
 			// rotateGlobe()
 			addItems()
-		changeFills('cereals')
+			changeFills('sugar', 'blue')
 	})
 </script>
 
 <style>
 	#map {
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: 100%;
 	}
 
 	:global(.globe) {
