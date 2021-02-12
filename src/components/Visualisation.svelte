@@ -161,7 +161,7 @@
 		min-width: 500px;
 		min-height: 500px;
 		width: 100vw;
-		height: calc(100vh - 30px);
+		height: 100vh;
 	}
 
 	#map {
