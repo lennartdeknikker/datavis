@@ -22,14 +22,13 @@ import { showAddModal } from '../stores'
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.336);
+    animation: fade .3s 1;
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   .AddModal-content {
     width: 100%;
-    height: 100%;
     max-width: 600px;
-    max-height: 450px;
     position: relative;
     background-color: rgb(183, 183, 255);
     padding: 20px;
@@ -54,4 +53,12 @@ import { showAddModal } from '../stores'
     color: rgb(78, 78, 248);
   }
 
+  @keyframes fade {
+    from {
+    background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+    background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
 </style>

@@ -9,28 +9,43 @@
     longitude = position.coords.longitude
   });
   }
+
+  const readOnly = event => event.preventDefault()
+  
 </script>
 
 <div>
   <form action="/upload" method="post" enctype="multipart/form-data">
     <fieldset>
-      <legend>About you</legend>
+      <legend>
+        <span>
+          About you
+        </span>
+      </legend>
       <label for="name">Your name:</label>
-      <input type="text" name="name" placeholder="name"/>
+      <input type="text" name="name" placeholder="name" required/>
       <label for="dateOfBirth">Your date of birth:</label>
-      <input type="date" name="dateOfBirth" />
+      <input type="date" name="dateOfBirth" required />
     </fieldset>
     <fieldset>
-      <legend>Your fridge</legend>
+      <legend>
+        <span>
+          Your fridge
+        </span>
+      </legend>
       <label for="picture">Photo:</label>
-      <input type="file" name="picture" />
+      <input type="file" name="picture" required />
     </fieldset>
     <fieldset>
-      <legend>Location</legend>
+      <legend>
+        <span>
+          Location
+        </span>
+      </legend>
       <label for="latitude">Latitude:</label>
-      <input type="text" name="latitude" value={latitude} readonly>
+      <input id="latitude" type="text" name="latitude" value={latitude} required on:keydown={readOnly}>
       <label for="longitude">Longitude:</label>
-      <input type="text" name="longitude" value={longitude} readonly>
+      <input id="longitude" type="text" name="longitude" value={longitude} required on:keydown={readOnly}>
       <input type="button" on:click={getLocation} value="get location">
     </fieldset>
     <input type="submit" value="send">
@@ -38,9 +53,100 @@
 </div>
 
 <style>
+
+  div {
+    width: 100%;
+  }
+
   form {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: calc(100% - 60px);
+    height: 100%;
+    color: rgb(111, 111, 252);
+    position: relative;
+  }
+  fieldset {
+    flex: 1;
+    display: flex;
+    margin-bottom: 10px;
+    width: calc(100% - 30px);
+    border: none;
+    background-color: rgba(255, 255, 255, 0.534);
+    flex-direction: column;
+    padding: 0 20px 20px 20px;
+  }
+
+  fieldset:last-of-type {
+    margin-bottom: 15px;
+  }
+
+  legend {
+    background-color: white;
+    color: rgb(111, 111, 252);
+    padding: 3px 10px 3px 5px;
+    width: 100px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  legend span {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  input + label {
+    margin-top: 10px;
+  }
+
+  input {
+    margin-left: 10px;
+    padding: 10px;
+    border: none;
+  }
+
+  input[type=file] {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    color: rgb(111, 111, 252);
+    text-transform: uppercase;
+    font-weight: bold;
+    width: fit-content;
+    margin-top: 10px;
+    align-self: center;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+  }
+
+  input[type=button] {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    color: rgb(111, 111, 252);
+    text-transform: uppercase;
+    font-weight: bold;
+    width: fit-content;
+    margin-top: 10px;
+    align-self: center;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+  }
+
+  input[type=button]:hover, input[type=submit]:hover, input[type=file]:hover {
+    color: white;
+    background-color: rgb(111, 111, 252);
+  }
+
+  input[type=submit] {
+    transition: background-color .2s ease, color .2s ease;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    padding: 10px;
+    color: rgb(111, 111, 252);
+    text-transform: uppercase;
+    font-weight: bold;
   }
 </style>
