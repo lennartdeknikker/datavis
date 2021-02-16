@@ -11,7 +11,7 @@
   }
 
   const readOnly = event => event.preventDefault()
-  
+
 </script>
 
 <div>
@@ -33,20 +33,21 @@
           Your fridge
         </span>
       </legend>
-      <label for="picture">Photo:</label>
       <input type="file" name="picture" required />
     </fieldset>
     <fieldset>
       <legend>
         <span>
-          Location
+          Your Location
         </span>
       </legend>
-      <label for="latitude">Latitude:</label>
-      <input id="latitude" type="text" name="latitude" value={latitude} required on:keydown={readOnly}>
-      <label for="longitude">Longitude:</label>
-      <input id="longitude" type="text" name="longitude" value={longitude} required on:keydown={readOnly}>
       <input type="button" on:click={getLocation} value="get location">
+      <div class="locationInputContainer">
+        <label for="latitude" class="locationLabel">lat:</label>
+        <input type="text" name="latitude" value={latitude} required on:keydown={readOnly} class="locationInput">
+        <label for="longitude" class="locationLabel">long:</label>
+        <input id="longitude" type="text" name="longitude" value={longitude} required on:keydown={readOnly} class="locationInput">
+      </div>
     </fieldset>
     <input type="submit" value="send">
   </form>
@@ -71,9 +72,9 @@
     display: flex;
     margin-bottom: 10px;
     width: calc(100% - 30px);
+    flex-wrap: wrap;
     border: none;
-    background-color: rgba(255, 255, 255, 0.534);
-    flex-direction: column;
+    background-color: rgb(219, 219, 250);
     padding: 0 20px 20px 20px;
   }
 
@@ -85,7 +86,7 @@
     background-color: white;
     color: rgb(111, 111, 252);
     padding: 3px 10px 3px 5px;
-    width: 100px;
+    width: 150px;
     font-weight: bold;
     text-align: center;
   }
@@ -94,6 +95,10 @@
     display: block;
     width: 100%;
     text-align: center;
+  }
+
+  label, input {
+    width: 100%;
   }
 
   input + label {
@@ -113,7 +118,7 @@
     color: rgb(111, 111, 252);
     text-transform: uppercase;
     font-weight: bold;
-    width: fit-content;
+    width: 100%;
     margin-top: 10px;
     align-self: center;
     cursor: pointer;
@@ -134,6 +139,23 @@
     transition: background-color .2s ease, color .2s ease;
   }
 
+  .locationInputContainer {
+    width: 100%;
+  }
+
+  .locationInput {
+    width: 30%;
+    height: fit-content;
+    margin-top: 10px;
+    background-color: rgb(219, 219, 250);
+    color: rgb(111, 111, 252);
+  }
+
+  .locationLabel {
+    width: fit-content;
+    padding: 10px;
+  }
+
   input[type=button]:hover, input[type=submit]:hover, input[type=file]:hover {
     color: white;
     background-color: rgb(111, 111, 252);
@@ -149,4 +171,8 @@
     text-transform: uppercase;
     font-weight: bold;
   }
+
+  .locationInput {
+  }
+
 </style>
