@@ -1,18 +1,18 @@
 <script>
-import Uploader from '../components/Uploader.svelte'
-import { showAddModal } from '../stores'
+import Uploader from './Uploader.svelte'
+import { showModal } from '../stores'
 </script>
 
 
-<div class="AddModal">
-  <div class="AddModal-content">  
-    <button on:click={showAddModal.set(!$showAddModal)}>X</button>
+<div class="Modal">
+  <div class="Modal-content">  
+    <button on:click={showModal.set(!$showModal)}>X</button>
     <Uploader />
   </div>
 </div>
 
 <style>
-  .AddModal {
+  .Modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -26,7 +26,7 @@ import { showAddModal } from '../stores'
     background-color: rgba(0, 0, 0, 0.7);
   }
 
-  .AddModal-content {
+  .Modal-content {
     width: 100%;
     max-width: 600px;
     position: relative;

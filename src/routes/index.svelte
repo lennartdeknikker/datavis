@@ -3,8 +3,8 @@
 	import Visualisation from '../components/Visualisation.svelte'
 	import Scale from '../components/scale.svelte';
 	import AddButton from '../components/AddButton.svelte';
-	import {showAddModal} from '../stores'
-import AddModal from '../components/AddModal.svelte';
+	import {showModal} from '../stores'
+import Modal from '../components/Modal.svelte';
 </script>
 
 <style>
@@ -23,7 +23,7 @@ import AddModal from '../components/AddModal.svelte';
 	<Scale />
 	<Visualisation />
 	<AddButton />
-	{#if $showAddModal}
-		<AddModal />
+	{#if $showModal}
+		<Modal />
 	{/if}
 </div>

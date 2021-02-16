@@ -4,7 +4,8 @@ export const activeCategoryId = writable('cereals');
 export const totalForActiveCategory = writable(60);
 export const maxForActiveCategory = writable(60);
 export const totalConsumption = writable(0);
-export const showAddModal = writable(false);
+export const showModal = writable(false);
+export const modalType = writable('upload');
 
 export const percentageOfTotalConsumption = derived(
   [totalForActiveCategory, totalConsumption],

@@ -175,7 +175,7 @@
 		}
 
 			loadMap()
-			// rotateGlobe()
+			rotateGlobe()
 			addItems()
 			activeCategoryId.subscribe(value => {changeFills(value, 'blue'); totalForActiveCategory.set(calculateTotalIntakeForCategory(value))})
 			totalConsumption.set(calculateTotalIntakeForAllCategories())

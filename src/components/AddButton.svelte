@@ -1,5 +1,10 @@
 <script>
-  import { showAddModal } from '../stores'
+  import { showModal, modalType } from '../stores'
+
+  const showUploadModal = () => {
+    modalType.set('upload')
+    showModal.set(true)
+  }
 </script>
 
 <style>
@@ -22,6 +27,6 @@
   }
 </style>
 
-<button on:click={() => showAddModal.set(true)}>
+<button on:click={showUploadModal}>
   +
 </button>
