@@ -43,15 +43,15 @@
       color: '#00b294'
     },
     {
+      id: 'alcoholic_beverages',
+      label: 'Alcoholic beverages',
+      color: '#bad80a'
+    },
+    {
       id: 'other',
       label: 'Other',
       color: '#009e49'
     },
-    {
-      id: 'alcoholic_beverages',
-      label: 'Alcoholic beverages',
-      color: '#bad80a'
-    }
   ]
 
     const clickHandler = (category) => {

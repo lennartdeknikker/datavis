@@ -8,9 +8,14 @@ import Modal from '../components/Modal.svelte';
 </script>
 
 <style>
+	:root {
+		--background-color: rgb(66, 66, 66)
+	}
+
 	div {
 		overflow: hidden;
 		max-width: 100vw;
+		background-color: var(--background-color);
 	}
 </style>
 

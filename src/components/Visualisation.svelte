@@ -103,7 +103,7 @@
 					updatePosition(projection, thisItem)
 				}
 			})
-			.on("click", function (d, i) {
+			.on("click", function () {
 				rotator?.stop()
 				const thisItem = d3.select(this).node()
 				unclickAllItems(projection, thisItem)

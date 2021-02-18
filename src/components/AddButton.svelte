@@ -14,16 +14,19 @@
     bottom: 40px;
     border-radius: 100%;
     border: none;
-    background-color: rgb(183, 183, 255);
-    color: white;
+    background-color: white;
+    color: var(--background-color);
     width: 40px;
     height: 40px;
     font-size: 1.2em;
     cursor: pointer;
+    transition: background-color .2s ease, color .2s ease, border .2s ease;
   }
 
   button:hover {
-    background-color: rgb(111, 111, 252);
+    color: white;
+    background-color: var(--background-color);
+    border: 2px solid white;
   }
 </style>
 
