@@ -60,4 +60,14 @@ const updateAllItems = (baseValues, projection) => {
   updatePositionForAllItems(projection)
 }
 
-export {getBaseValues, updatePosition, updatePositionForAllItems, updateMaxDimensions, updateMaxDimensionsForAllItems, updateAllItems}
+const unclickAllItems = (projection, thisItem = null) => {
+  const otherClickedElement = document.querySelector(`[data-clicked="true"]`)
+  if (otherClickedElement && otherClickedElement !== thisItem) {
+    otherClickedElement.dataset.clicked = "false"
+    otherClickedElement.classList.remove('clicked')
+    updateMaxDimensions(getBaseValues(), otherClickedElement)
+    updatePosition(projection, otherClickedElement)
+  }
+}
+
+export {getBaseValues, updatePosition, updatePositionForAllItems, updateMaxDimensions, updateMaxDimensionsForAllItems, updateAllItems, unclickAllItems}

@@ -1,55 +1,76 @@
 <script>
-  import { activeCategoryId } from '../stores'
+  import { activeCategoryId, categoryColor } from '../stores'
 
   const categories = [
     {
       id: 'cereals',
-      label: 'Cereals & Grains'
+      label: 'Cereals & Grains',
+      color: '#fff100'
     },
     {
       id: 'pulses',
-      label: 'Pulses'
+      label: 'Pulses',
+      color: '#ff8c00'
     },
     {
       id: 'starchy_roots',
-      label: 'Starchy Roots'
+      label: 'Starchy Roots',
+      color: '#e81123'
     },
     {
       id: 'sugar',
-      label: 'Sugar'
+      label: 'Sugar',
+      color: '#ec008c'
     },
     {
       id: 'oils_and_fats',
-      label: 'Oils & Fats'
+      label: 'Oils & Fats',
+      color: '#68217a'
     },
     {
       id: 'meat',
-      label: 'Meat'
+      label: 'Meat',
+      color: '#00188f'
     },
     {
       id: 'dairy_and_eggs',
-      label: 'Dairy & Eggs'
+      label: 'Dairy & Eggs',
+      color: '#00bcf2'
     },
     {
       id: 'fruit_and_vegetables',
-      label: 'Fruit & Vegetables'
+      label: 'Fruit & Vegetables',
+      color: '#00b294'
     },
     {
       id: 'other',
-      label: 'Other'
+      label: 'Other',
+      color: '#009e49'
     },
     {
       id: 'alcoholic_beverages',
-      label: 'Alcoholic beverages'
+      label: 'Alcoholic beverages',
+      color: '#bad80a'
     }
   ]
+
+    const clickHandler = (category) => {
+      categoryColor.set(category.color)
+      activeCategoryId.set(category.id)
+    }
 
 </script>
 
 <nav>
   <ul>
     {#each categories as category}
-    <li class:active="{category.id === $activeCategoryId}" on:click={() => activeCategoryId.set(category.id)}>{category.label}</li>
+    <li 
+    style={`--category-color: ${category.color}`} 
+    class:active="{category.id === $activeCategoryId}" 
+    on:click={() => clickHandler(category)}
+    >
+      {category.label}
+    </li>
     {/each}
   </ul>
 </nav>
@@ -73,7 +94,7 @@
   }
   
   li {
-    background-color: rgb(183, 183, 255);
+    background-color: var(--category-color);
     display: flex;
     height: 70px;
     width: 150px;
@@ -89,7 +110,7 @@
   }
 
   li.active {
-    background-color: rgb(111, 111, 252);
-    color: white;
+    border: 2px solid black;
+    color: black;
   }
 </style>

@@ -1,6 +1,6 @@
 <script>
-	import { activeCategoryId, totalConsumption, totalForActiveCategory } from '../stores'
-	import {getBaseValues, updatePosition, updateMaxDimensions, updateAllItems} from '../utils/globeItemFunctions'
+	import { activeCategoryId, totalConsumption, totalForActiveCategory, categoryColor } from '../stores'
+	import {getBaseValues, updatePosition, updateMaxDimensions, updateAllItems, unclickAllItems} from '../utils/globeItemFunctions'
 	import {calculateTotalIntakeForCategory, calculateTotalIntakeForAllCategories} from '../utils/scaleFunctions'
 	import {changeFills} from '../utils/globeFunctions'
 
@@ -39,6 +39,7 @@
 		svg
 			.call(d3.drag().on('drag', function (event) {
 				rotator?.stop()
+				unclickAllItems(projection)
 				const rotate = projection.rotate()
 				const k = sensitivity / projection.scale()
 				projection.rotate([
@@ -51,6 +52,7 @@
 			}))
 			.call(d3.zoom().on('zoom', function (event) {
 				rotator?.stop()
+				unclickAllItems(projection)
 				if(event.transform.k > 0.3) {
 					projection.scale(initialScale * event.transform.k)
 					path = d3.geoPath().projection(projection)
@@ -89,27 +91,22 @@
 				if (thisItem.dataset.clicked !== "true") {
 					thisItem.style.width = "55px"
 					thisItem.style.height = "55px"
+					thisItem.style.zIndex = 1
 					updatePosition(projection, thisItem)
 				}
 			})		
 			.on("mouseout", function () {
 				const thisItem = d3.select(this).node()
+					thisItem.style.zIndex = 0
 				if (thisItem.dataset.clicked !== "true") {
 					updateMaxDimensions(getBaseValues(), thisItem)
 					updatePosition(projection, thisItem)
 				}
 			})
 			.on("click", function (d, i) {
+				rotator?.stop()
 				const thisItem = d3.select(this).node()
-
-				// unclick other items
-				const otherClickedElement = document.querySelector(`[data-clicked="true"]`)
-				if (otherClickedElement && otherClickedElement !== thisItem) {
-					otherClickedElement.dataset.clicked = "false"
-					otherClickedElement.classList.remove('clicked')
-					updateMaxDimensions(getBaseValues(), otherClickedElement)
-					updatePosition(projection, otherClickedElement)
-				}
+				unclickAllItems(projection, thisItem)
 				if (thisItem.dataset.clicked === "true") {
 					thisItem.dataset.clicked = "false"
 					thisItem.classList.remove('clicked')
@@ -145,7 +142,7 @@
 			loadMap()
 			rotateGlobe()
 			addItems()
-			activeCategoryId.subscribe(value => {changeFills(dietData, value, 'red'); totalForActiveCategory.set(calculateTotalIntakeForCategory(value, dietData))})
+			activeCategoryId.subscribe(value => {changeFills(dietData, value, $categoryColor); totalForActiveCategory.set(calculateTotalIntakeForCategory(value, dietData))})
 			totalConsumption.set(calculateTotalIntakeForAllCategories(dietData))
 	})
 </script>
@@ -191,7 +188,7 @@
 
 	:global(.item.clicked) {
 		z-index: 2;
-		border: 10px solid blue;
+		border: 10px solid #9db3b0;
 		width: 300px;
 		height: 300px;
 	}
