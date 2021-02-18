@@ -4,7 +4,8 @@
 	import Scale from '../components/scale.svelte';
 	import AddButton from '../components/AddButton.svelte';
 	import {showModal} from '../stores'
-import Modal from '../components/Modal.svelte';
+	import Modal from '../components/Modal.svelte';
+  import { categoryColor } from '../stores'
 </script>
 
 <style>
@@ -23,7 +24,7 @@ import Modal from '../components/Modal.svelte';
 	<title>Fridges around the world</title>
 </svelte:head>
 
-<div>
+<div style={`--category-color: ${$categoryColor}`}>
 	<Nav />
 	<Scale />
 	<Visualisation />

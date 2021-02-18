@@ -69,7 +69,12 @@
     class:active="{category.id === $activeCategoryId}" 
     on:click={() => clickHandler(category)}
     >
+    <div class="icon-container">
+      <img src={`icons/${category.id}.svg`} alt={category.label}>
+    </div>
+    <span>
       {category.label}
+    </span>
     </li>
     {/each}
   </ul>
@@ -80,37 +85,78 @@
     width: 100vw;
     position: absolute;
     top: 0;
+    padding: 10px;
     left: 0;
   }
 
   ul {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
     margin: 0;
+    min-height: 150px;
   }
   
   li {
     background-color: var(--category-color);
     display: flex;
-    height: 70px;
-    width: 150px;
+    width: 100%;
+    height: 500px;
+    max-height: 70px;
+    max-width: 70px;
     padding: 10px;
     margin: 2px;
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    padding: 5px;
     text-align: center;
     color: white;
     cursor: pointer;
-    transition: background-color 300ms ease;
+    opacity: .5;
+    transition: opacity 300ms ease, max-width .2s ease, max-height .2s ease;
+    flex-direction: column;
+    border-radius: 100%;
+  }
+
+  li span {
+    max-height: 0;
+    max-width: 0;
+    opacity: 0;
+    transition: opacity 300ms ease, max-width .2s ease, max-height .2s ease;
+  }
+
+  li:hover {
+    opacity: 1;
   }
 
   li.active {
-    border: 2px solid black;
-    color: black;
+    max-height: 130px;
+    max-width: 130px;
+    border: 2px solid var(--background-color);
+    color: var(--background-color);
+    opacity: 1;
+  }
+
+  li.active span {
+    max-height: 300px;
+    max-width: 300px;
+    opacity: 1;
+  }
+
+  .icon-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: white;
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
   }
 </style>
