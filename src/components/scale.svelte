@@ -16,13 +16,13 @@
     bottom: 0;
     display: flex;
     justify-content: flex-start;
-    background-color: rgb(183, 183, 255);
+    background-color: white;
 		overflow: hidden;
   }
 
   span {
     padding: 0 10px;
-    color: blue;
+    color: var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,7 +32,7 @@
   .Scale {
     width: 0;
     height: 100%;
-    background: linear-gradient(0.25turn, white, blue);
+    background: linear-gradient(0.25turn, white, var(--category-color));
     box-sizing: border-box;
   }
 </style>

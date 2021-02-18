@@ -10,13 +10,14 @@
 
 <style>
 	:root {
-		--background-color: rgb(66, 66, 66)
+		--background-color: black;
 	}
 
 	div {
 		overflow: hidden;
 		max-width: 100vw;
-		background-color: var(--background-color);
+		/* background-color: var(--background-color); */
+		background: radial-gradient(rgb(66,66,66), var(--background-color));
 	}
 </style>
 

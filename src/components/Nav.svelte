@@ -137,7 +137,6 @@
   li.active {
     max-height: 130px;
     max-width: 130px;
-    border: 2px solid var(--background-color);
     color: var(--background-color);
     opacity: 1;
   }
