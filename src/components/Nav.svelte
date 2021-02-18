@@ -119,6 +119,7 @@
     padding: 5px;
     text-align: center;
     color: white;
+    margin: 5px;
     cursor: pointer;
     opacity: .7;
     transition: opacity 300ms ease, max-width .2s ease, max-height .2s ease;

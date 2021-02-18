@@ -2,31 +2,45 @@
   import { percentageOfTotalConsumption, maxForActiveCategory } from '../stores'
 </script>
 
-<div class="Scale-container">
-  <span>0</span>
-  <div class="Scale" style={`width: calc(${$percentageOfTotalConsumption}%);`}/>
-  <span>{$maxForActiveCategory} (kcal per person per day)</span>
+<div class="Scale-wrapper">
+  <span>kcal per person per day</span>
+  <div class="Scale-container">
+    <span>0</span>
+    <div class="Scale" style={`width: calc(${$percentageOfTotalConsumption}%);`}/>
+    <span>{$maxForActiveCategory}</span>
+  </div>
 </div>
 
 <style>
-  .Scale-container {
+
+  .Scale-wrapper {
     width: 100vw;
-    height: 20px;
-    position: absolute;
-    bottom: 0;
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .Scale-wrapper span {
+    color: white;
+  }
+
+  .Scale-container {
+    width: 300px;
+    height: 20px;
+    display: flex;
     background-color: white;
 		overflow: hidden;
   }
 
-  span {
+  .Scale-wrapper .Scale-container span {
     padding: 0 10px;
     color: var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 240px;
   }
 
   .Scale {
