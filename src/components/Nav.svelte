@@ -88,6 +88,7 @@
     padding: 10px;
     box-sizing: border-box;
     left: 0;
+    z-index: 10;
   }
 
   ul {
@@ -103,6 +104,7 @@
   }
   
   li {
+    -webkit-tap-highlight-color: transparent;
     background-color: var(--category-color);
     display: flex;
     width: 100%;
