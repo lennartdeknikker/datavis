@@ -182,13 +182,13 @@
 		width: 50px;
 		height: 50px;
 		display: flex;
-		border: 2px solid #9db3b0;
+		border: 2px solid var(--category-color);
 		cursor: pointer;
 	}
 
 	:global(.item.clicked) {
 		z-index: 2;
-		border: 10px solid #9db3b0;
+		border: 10px solid var(--category-color);
 		width: 300px;
 		height: 300px;
 	}
