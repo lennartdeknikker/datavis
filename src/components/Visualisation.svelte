@@ -1,6 +1,9 @@
 <script>
-	import { activeCategoryId, maxForActiveCategory, totalConsumption, totalForActiveCategory } from '../stores'
+	import { activeCategoryId, totalConsumption, totalForActiveCategory } from '../stores'
 	import {getBaseValues, updatePosition, updateMaxDimensions, updateAllItems} from '../utils/globeItemFunctions'
+	import {calculateTotalIntakeForCategory, calculateTotalIntakeForAllCategories} from '../utils/scaleFunctions'
+	import {changeFills} from '../utils/globeFunctions'
+
 	import * as d3 from "d3";
   import { onMount } from 'svelte'
   import data from '../data/fridges.json'
@@ -9,43 +12,10 @@
 	import dietData from '../data/diet.json'
 
 	onMount(() => {
-		let rotator
-		const getDomain = value => {
-			const maxValue = Math.max.apply(Math, dietData.map((o) => o?.[value] ))
-			const roundedByFiveHundred = Math.ceil(maxValue / 500) * 500
-			maxForActiveCategory.set(roundedByFiveHundred)
-			return [0, roundedByFiveHundred]
-		}
-
-		const calculateTotalIntakeForCategory = (category) => {
-			return dietData.reduce((acc, curr) => acc + curr?.[category], 0)
-		}
-
-		const calculateTotalIntakeForAllCategories = () => {
-			let acc = 0
-			for ( const category in dietData[0]) {
-				if (!['entity', 'year', 'code'].includes(category)) acc += calculateTotalIntakeForCategory(category)
-			}
-			return acc
-		}
-
-
-
-		const changeFills = (value, color) => {
-			const domain = getDomain(value)
-			const colorScale = d3.scaleLinear().domain(domain).range(["white", color])
-			const countries = d3.selectAll('.country')
-			countries
-				.transition().duration(300).style("fill", (d, i) => {
-					const item = dietData.find(item => item.entity === d.properties.name)
-					return colorScale(item?.[value])
-				})
-		}
-
+		let rotator		
 		let mapWidth = d3.select("#map").node().getBoundingClientRect().width
 		let mapHeight = d3.select("#map").node().getBoundingClientRect().height
 		let sensitivity = 75
-
 		let projection = d3.geoOrthographic()
 			.scale(250)
 			.center([0, 0])
@@ -66,8 +36,6 @@
 			.attr("cy", mapHeight/2)
 			.attr("r", initialScale)
 
-		const baseValues = getBaseValues()
-
 		svg
 			.call(d3.drag().on('drag', function (event) {
 				rotator?.stop()
@@ -79,7 +47,7 @@
 				])
 				path = d3.geoPath().projection(projection)
 				svg.selectAll("path").attr("d", path)
-				updateAllItems(baseValues, projection)
+				updateAllItems(getBaseValues(), projection)
 			}))
 			.call(d3.zoom().on('zoom', function (event) {
 				rotator?.stop()
@@ -87,7 +55,7 @@
 					projection.scale(initialScale * event.transform.k)
 					path = d3.geoPath().projection(projection)
 					svg.selectAll("path").attr("d", path)
-					updateAllItems(baseValues, projection)
+					updateAllItems(getBaseValues(), projection)
 					globe.attr("r", projection.scale())
 				}
 				else {
@@ -121,14 +89,14 @@
 				if (thisItem.dataset.clicked !== "true") {
 					thisItem.style.width = "55px"
 					thisItem.style.height = "55px"
-					updatePosition(baseValues, projection, thisItem)
+					updatePosition(projection, thisItem)
 				}
 			})		
 			.on("mouseout", function () {
 				const thisItem = d3.select(this).node()
 				if (thisItem.dataset.clicked !== "true") {
-					updateMaxDimensions(baseValues, thisItem)
-					updatePosition(baseValues, projection, thisItem)
+					updateMaxDimensions(getBaseValues(), thisItem)
+					updatePosition(projection, thisItem)
 				}
 			})
 			.on("click", function (d, i) {
@@ -139,20 +107,20 @@
 				if (otherClickedElement && otherClickedElement !== thisItem) {
 					otherClickedElement.dataset.clicked = "false"
 					otherClickedElement.classList.remove('clicked')
-					updateMaxDimensions(baseValues, otherClickedElement)
-					updatePosition(baseValues, projection, otherClickedElement)
+					updateMaxDimensions(getBaseValues(), otherClickedElement)
+					updatePosition(projection, otherClickedElement)
 				}
 				if (thisItem.dataset.clicked === "true") {
 					thisItem.dataset.clicked = "false"
 					thisItem.classList.remove('clicked')
-					updateMaxDimensions(baseValues, thisItem)
+					updateMaxDimensions(getBaseValues(), thisItem)
 				} else {
 					thisItem.dataset.clicked = "true"
 					thisItem.classList.add('clicked')
 					thisItem.style.width = null
 					thisItem.style.height = null
 				}
-				updatePosition(baseValues, projection, thisItem)
+				updatePosition(projection, thisItem)
 			} )
 
 			items.append("img")
@@ -170,15 +138,15 @@
 				])
 				path = d3.geoPath().projection(projection)
 				svg.selectAll("path").attr("d", path)
-				updateAllItems(baseValues, projection)
+				updateAllItems(getBaseValues(), projection)
 			},200)
 		}
 
 			loadMap()
 			rotateGlobe()
 			addItems()
-			activeCategoryId.subscribe(value => {changeFills(value, 'blue'); totalForActiveCategory.set(calculateTotalIntakeForCategory(value))})
-			totalConsumption.set(calculateTotalIntakeForAllCategories())
+			activeCategoryId.subscribe(value => {changeFills(dietData, value, 'red'); totalForActiveCategory.set(calculateTotalIntakeForCategory(value, dietData))})
+			totalConsumption.set(calculateTotalIntakeForAllCategories(dietData))
 	})
 </script>
 
@@ -226,6 +194,10 @@
 		border: 10px solid blue;
 		width: 300px;
 		height: 300px;
+	}
+
+	:global(.item.hidden) {
+		display: none;
 	}
 
 	:global(.item-image) {

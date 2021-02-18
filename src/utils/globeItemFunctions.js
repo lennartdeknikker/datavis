@@ -14,17 +14,23 @@ const getBaseValues = () => {
   }
 }
 
-const updatePosition = (baseValues, projection, item) => {
+const updatePosition = (projection, item) => {
   const correction = item.getBoundingClientRect().width / 2
-  const itemCoordinates = projection([item.dataset.latitude, item.dataset.longitude])
+  const coordinates = [item.dataset.latitude, item.dataset.longitude]
+  const itemCoordinates = projection(coordinates)
+  const baseValues = getBaseValues()
+  const globeCenter = [baseValues.globeCenterX, baseValues.globeCenterY]
+  const gDistance = d3.geoDistance(coordinates, projection.invert(globeCenter))
+  const shouldNotShow = gDistance > 1.5
+  shouldNotShow ? item.classList.add('hidden') : item.classList.remove('hidden')
   item.style.left = `${itemCoordinates[0] - correction}px`
-  item.style.top = `${itemCoordinates[1] - correction}px`
+  item.style.top = `${itemCoordinates[1] - correction}px`  
 }
 
-const updatePositionForAllItems = (baseValues, projection) => {
+const updatePositionForAllItems = (projection) => {
   const items = document.querySelectorAll('.item')
   items.forEach(item => {
-    updatePosition(baseValues, projection, item)
+    updatePosition(projection, item)
   })
 }
 
@@ -51,7 +57,7 @@ const updateMaxDimensionsForAllItems = (baseValues) => {
 
 const updateAllItems = (baseValues, projection) => {
   updateMaxDimensionsForAllItems(baseValues)
-  updatePositionForAllItems(baseValues, projection)
+  updatePositionForAllItems(projection)
 }
 
 export {getBaseValues, updatePosition, updatePositionForAllItems, updateMaxDimensions, updateMaxDimensionsForAllItems, updateAllItems}

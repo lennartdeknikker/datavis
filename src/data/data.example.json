@@ -1,4 +1,292 @@
 {
   "fridges": [
+    {
+      "name": "anonymous",
+      "dateOfBirth": "1995-01-01",
+      "location": [
+        "4.501490333347831",
+        "52.15624072007041"
+      ],
+      "photos": [
+        {
+          "name": "1613643269060_1995-01-01_anonymous.jpg",
+          "path": "images/upload/1613643269060_1995-01-01_anonymous.jpg",
+          "mimetype": "image/jpeg",
+          "size": 3697475
+        }
+      ]
+    },
+    {
+      "name": "anonymous",
+      "dateOfBirth": "1996-01-01",
+      "location": [
+        "4.940684796965225",
+        "52.063313219044765"
+      ],
+      "photos": [
+        {
+          "name": "1613643333050_1996-01-01_anonymous.jpg",
+          "path": "images/upload/1613643333050_1996-01-01_anonymous.jpg",
+          "mimetype": "image/jpeg",
+          "size": 2146448
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "1.0853954139363713",
+        "51.278323916754665"
+      ],
+      "photos": [
+        {
+          "name": "1613643479263_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613643479263_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 94048
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "-0.23047598189347646",
+        "51.47052934418338"
+      ],
+      "photos": [
+        {
+          "name": "1613643519102_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613643519102_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 94097
+        }
+      ]
+    },
+    {
+      "name": "anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "20.738661194908335",
+        "54.15219689362947"
+      ],
+      "photos": [
+        {
+          "name": "1613643587662_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613643587662_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 136316
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "-94.90436192352895",
+        "38.174292852326616"
+      ],
+      "photos": [
+        {
+          "name": "1613643660918_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613643660918_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 119531
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "134.13860204051713",
+        "-21.896165961615125"
+      ],
+      "photos": [
+        {
+          "name": "1613643691354_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613643691354_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 123990
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "27.439386362099476",
+        "-24.160791537034097"
+      ],
+      "photos": [
+        {
+          "name": "1613643853605_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613643853605_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 132219
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        " -0.509831651599913",
+        "11.744751633012545"
+      ],
+      "photos": [
+        {
+          "name": "1613643891869_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613643891869_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 160670
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "126.93157212574874",
+        "63.882289652015764"
+      ],
+      "photos": [
+        {
+          "name": "1613643918254_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613643918254_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 186046
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "-115.9408659242859",
+        "63.497050498807674"
+      ],
+      "photos": [
+        {
+          "name": "1613643967621_1990-01-01_anonymous.jpg",
+          "path": "images/upload/1613643967621_1990-01-01_anonymous.jpg",
+          "mimetype": "image/jpeg",
+          "size": 2836018
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "106.92373485434551",
+        "45.362981698006706"
+      ],
+      "photos": [
+        {
+          "name": "1613643997256_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613643997256_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 90521
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "62.802642230775525",
+        "64.10774174760839"
+      ],
+      "photos": [
+        {
+          "name": "1613644034315_1990-01-01_anonymous.jpg",
+          "path": "images/upload/1613644034315_1990-01-01_anonymous.jpg",
+          "mimetype": "image/jpeg",
+          "size": 190439
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "-71.67001217297819",
+        "0.0373952838916187"
+      ],
+      "photos": [
+        {
+          "name": "1613644066928_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613644066928_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 228696
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "46.4549852884332",
+        "-17.27298251956879"
+      ],
+      "photos": [
+        {
+          "name": "1613644115046_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613644115046_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 176929
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "-140.67113175423702",
+        "64.16606126916021"
+      ],
+      "photos": [
+        {
+          "name": "1613644152235_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613644152235_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 133887
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "106.98688753683918",
+        "30.854979899981135"
+      ],
+      "photos": [
+        {
+          "name": "1613644180974_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613644180974_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 121922
+        }
+      ]
+    },
+    {
+      "name": "Anonymous",
+      "dateOfBirth": "1990-01-01",
+      "location": [
+        "113.31501398746127",
+        "33.532140490913946"
+      ],
+      "photos": [
+        {
+          "name": "1613644215664_1990-01-01_anonymous.jpeg",
+          "path": "images/upload/1613644215664_1990-01-01_anonymous.jpeg",
+          "mimetype": "image/jpeg",
+          "size": 173226
+        }
+      ]
+    }
   ]
 }
