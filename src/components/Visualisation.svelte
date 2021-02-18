@@ -119,8 +119,8 @@
 			.on("mouseover", function () {
 				const thisItem = d3.select(this).node()
 				if (thisItem.dataset.clicked !== "true") {
-					thisItem.style.maxWidth = "55px"
-					thisItem.style.maxHeight = "55px"
+					thisItem.style.width = "55px"
+					thisItem.style.height = "55px"
 					updatePosition(baseValues, projection, thisItem)
 				}
 			})		
@@ -149,8 +149,8 @@
 				} else {
 					thisItem.dataset.clicked = "true"
 					thisItem.classList.add('clicked')
-					thisItem.style.maxWidth = null
-					thisItem.style.maxHeight = null
+					thisItem.style.width = null
+					thisItem.style.height = null
 				}
 				updatePosition(baseValues, projection, thisItem)
 			} )
@@ -214,8 +214,8 @@
 		position: absolute;
 		border-radius: 50%;
 		overflow: hidden;
-		max-width: 50px;
-		max-height: 50px;
+		width: 50px;
+		height: 50px;
 		display: flex;
 		border: 2px solid #9db3b0;
 		cursor: pointer;
@@ -224,8 +224,8 @@
 	:global(.item.clicked) {
 		z-index: 2;
 		border: 10px solid blue;
-		max-width: 300px;
-		max-height: 300px;
+		width: 300px;
+		height: 300px;
 	}
 
 	:global(.item-image) {

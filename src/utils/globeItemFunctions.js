@@ -38,8 +38,8 @@ const updateMaxDimensions = (baseValues, item) => {
   const distance = Math.sqrt((xDifference * xDifference) + (yDifference * yDifference))
   const max = `${maxValue - (maxValue * shrinkage * (distance / maxDistance))}px`
 
-  item.style.maxWidth = max	
-  item.style.maxHeight = max
+  item.style.width = max	
+  item.style.height = max
 }
 
 const updateMaxDimensionsForAllItems = (baseValues) => {
