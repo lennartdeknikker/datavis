@@ -86,6 +86,7 @@
     position: absolute;
     top: 0;
     padding: 10px;
+    box-sizing: border-box;
     left: 0;
   }
 
@@ -117,7 +118,7 @@
     text-align: center;
     color: white;
     cursor: pointer;
-    opacity: .5;
+    opacity: .7;
     transition: opacity 300ms ease, max-width .2s ease, max-height .2s ease;
     flex-direction: column;
     border-radius: 100%;

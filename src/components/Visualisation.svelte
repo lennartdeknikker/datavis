@@ -17,7 +17,7 @@
 		let mapHeight = d3.select("#map").node().getBoundingClientRect().height
 		let sensitivity = 75
 		let projection = d3.geoOrthographic()
-			.scale(250)
+			.scale(window.innerWidth < 500 ? 100 : 250)
 			.center([0, 0])
 			.rotate([0,-30])
 			.translate([mapWidth / 2, mapHeight / 2])
@@ -149,8 +149,6 @@
 
 <style>
 	.visualisation {
-		min-width: 500px;
-		min-height: 500px;
 		width: 100vw;
 		height: 100vh;
 	}
