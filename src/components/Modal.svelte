@@ -21,7 +21,7 @@ let content = Uploader
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1;
+    z-index: 15;
     display: flex;
     justify-content: center;
     align-items: center;
