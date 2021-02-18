@@ -3,7 +3,7 @@
 	import {getBaseValues, updatePosition, updateMaxDimensions, updateAllItems} from '../utils/globeItemFunctions'
 	import * as d3 from "d3";
   import { onMount } from 'svelte'
-  import data from '../data/test.json'
+  import data from '../data/fridges.json'
   import geoJson from '../data/map.json'
 	// source: https://ourworldindata.org/diet-compositions#diet-compositions-by-food-groups
 	import dietData from '../data/diet.json'

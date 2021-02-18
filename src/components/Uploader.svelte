@@ -25,7 +25,7 @@
       <label for="name">Your name:</label>
       <input type="text" name="name" placeholder="name" required/>
       <label for="dateOfBirth">Your date of birth:</label>
-      <input type="date" name="dateOfBirth" required />
+      <input type="date" name="dateOfBirth" required value="1990-01-01" />
     </fieldset>
     <fieldset>
       <legend>

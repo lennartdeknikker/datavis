@@ -1,8 +1,8 @@
 <script>
-  import { showModal, modalType } from '../stores'
+  import { showModal, modalContent } from '../stores'
 
   const showUploadModal = () => {
-    modalType.set('upload')
+    modalContent.set('upload')
     showModal.set(true)
   }
 </script>

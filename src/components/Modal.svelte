@@ -1,13 +1,16 @@
 <script>
 import Uploader from './Uploader.svelte'
-import { showModal } from '../stores'
+import { showModal, modalContent } from '../stores'
+
+let content = Uploader
+
 </script>
 
 
 <div class="Modal">
   <div class="Modal-content">  
     <button on:click={showModal.set(!$showModal)}>X</button>
-    <Uploader />
+    <svelte:component this={content} />
   </div>
 </div>
 
