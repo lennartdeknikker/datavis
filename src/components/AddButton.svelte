@@ -20,6 +20,7 @@
     height: 40px;
     font-size: 1.2em;
     cursor: pointer;
+    border: 2px solid  var(--background-color);
     transition: background-color .2s ease, color .2s ease, border .2s ease;
   }
 
