@@ -17,7 +17,7 @@
 		let mapHeight = d3.select("#map").node().getBoundingClientRect().height
 		let sensitivity = 75
 		let projection = d3.geoOrthographic()
-			.scale(window.innerWidth < 500 ? 100 : 250)
+			.scale(window.innerWidth < 500 ? 100 : 200)
 			.center([0, 0])
 			.rotate([0,-30])
 			.translate([mapWidth / 2, mapHeight / 2])
@@ -97,8 +97,8 @@
 			})		
 			.on("mouseout", function () {
 				const thisItem = d3.select(this).node()
-					thisItem.style.zIndex = 0
 				if (thisItem.dataset.clicked !== "true") {
+					thisItem.style.zIndex = 0
 					updateMaxDimensions(getBaseValues(), thisItem)
 					updatePosition(projection, thisItem)
 				}
@@ -185,7 +185,7 @@
 	}
 
 	:global(.item.clicked) {
-		z-index: 2;
+		z-index: 10;
 		border: 10px solid var(--category-color);
 		width: 300px;
 		height: 300px;

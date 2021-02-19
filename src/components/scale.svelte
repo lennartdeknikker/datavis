@@ -31,16 +31,19 @@
     width: 300px;
     height: 20px;
     display: flex;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.384);
 		overflow: hidden;
+    border-radius: 10px;
+    justify-content: space-between;
   }
 
   .Scale-wrapper .Scale-container span {
     padding: 0 10px;
-    color: var(--background-color);
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 30px;
   }
 
   .Scale {

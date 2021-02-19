@@ -11,7 +11,7 @@
   button {
     position: fixed;
     right: 20px;
-    bottom: 40px;
+    bottom: 20px;
     border-radius: 100%;
     border: none;
     background-color: white;
