@@ -1,7 +1,7 @@
 # World Fridges Project
 This project aims to show differences in people's diets all around the world. It shows pictures of their fridges on the globe. You can also switch between categories to see how many calories people consume for that category. That way you can see for example where in the world people consume most dairy products and then check out what they actually have in their fridges.
 
-More information on the building process and design can be found [here](https://le….gitbook.io/world-fridges-project).
+More information on the building process and design can be found [here](https://lennartdeknikker.gitbook.io/world-fridges-project).
 
 ## Screenshots
 ### Desktop interface
