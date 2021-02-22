@@ -6,7 +6,6 @@ let content = Uploader
 
 </script>
 
-
 <div class="Modal">
   <div class="Modal-content">  
     <button on:click={showModal.set(!$showModal)}>X</button>

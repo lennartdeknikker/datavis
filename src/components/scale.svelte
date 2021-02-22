@@ -23,25 +23,31 @@
     bottom: 20px;
   }
 
-  .Scale-wrapper span {
+  .Scale-wrapper > span {
+    mix-blend-mode: exclusion;
+  }
+
+  span {
     color: white;
+    display: block;
   }
 
   .Scale-container {
     width: 300px;
     height: 20px;
     display: flex;
-    background-color: rgba(255, 255, 255, 0.384);
 		overflow: hidden;
     border-radius: 10px;
     justify-content: space-between;
+    border: 2px solid var(--background-color);
+    background-color: white;
   }
 
   .Scale-wrapper .Scale-container span {
     padding: 0 10px;
-    color: white;
     display: flex;
     justify-content: center;
+    background-color: var(--background-color);
     align-items: center;
     width: 30px;
   }
@@ -51,5 +57,6 @@
     height: 100%;
     background: linear-gradient(0.25turn, white, var(--category-color));
     box-sizing: border-box;
+    position: relative;
   }
 </style>
