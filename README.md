@@ -12,3 +12,10 @@ To start working on this project, either fork or clone this repository.
 
 1. Then install the necessary dependencies with `npm install` or `yarn install`.
 2. Use `npm run dev` or `yarn dev` to run and have the browser automatically update any changes while you're coding.
+
+## Resources
+- This project is built within the [Svelte framework](https://svelte.dev/)
+- This project uses the [D3.js library](https://d3js.org/) for the data visualisation
+
+## License
+This project is licensed under the terms of the [MIT license](https://github.com/lennartdeknikker/datavis/blob/main/LICENSE).
